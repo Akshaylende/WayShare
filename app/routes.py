@@ -28,3 +28,17 @@ def register():
     redirect(url_for('home'))
 
 
+@app.route('/sign-in',  methods = ['GET'])
+def signin():
+    return render_template('signin.html')
+
+@app.route('/login', methods = ['POST'])
+def login():
+    '''
+    This function checks for the user in our db and checks for validity
+    '''
+    user = request.data.json()
+    if user in db["registry"]:
+        redirect(url_for('home'))
+    
+    redirect(url_for('signin'))
