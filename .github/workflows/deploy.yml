@@ -1,0 +1,33 @@
+name: CI/CD - Deploy WayShare to PythonAnywhere
+
+on:
+  push:
+    branches:
+      - main  # Trigger only when main is updated
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🛎️ Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python (optional for testing)
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: 🔍 Install dependencies (for lint/test)
+        run: |
+          pip install -r requirements.txt
+
+      - name: ✅ Run Tests (optional)
+        run: |
+          echo "No tests yet" 
+
+      - name: 🚀 Trigger Reload on PythonAnywhere
+        run: |
+          curl -X POST \
+            https://www.pythonanywhere.com/api/v0/user/${{ secrets.PA_USERNAME }}/webapps/${{ secrets.PA_USERNAME }}.pythonanywhere.com/reload/ \
+            -H "Authorization: Token ${{ secrets.PA_API_TOKEN }}"
