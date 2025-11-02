@@ -20,8 +20,15 @@ def create_user(uname, email, pswd):
 
 def check_valid_user(uname, email) -> bool:
 
-    for user in db.users:
-        if user.userName == uname or user.email == email:
+    for user in db['registry']:
+        if user['userName'] == uname or user['email'] == email:
             return False 
     
     return True
+
+def user_exists(email, pwsd)->bool:
+    for user in db['registry']:
+        if user['email'] == email and user['password'] == pwsd:
+            return True
+        
+    return False

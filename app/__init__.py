@@ -10,7 +10,7 @@ def create_app():
     This function creates and configures the Flask application instance.
     '''
     # Initializing user collection 
-    db['registry'] = []
+    db['registry'] = [{'username': 'test', 'email': 'test@gmail.com', 'password': 'test'}]
     
     # Importing routes
     from app import routes
