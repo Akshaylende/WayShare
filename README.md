@@ -31,3 +31,13 @@ so far DB
          2. rides
          3. record
          4. registry
+
+
+
+
+
+# Build the image
+docker build -t wayshare-app .
+
+# Run the container
+docker run -p 5000:5050 wayshare-app
