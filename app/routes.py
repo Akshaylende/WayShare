@@ -1,6 +1,7 @@
 from flask import app, render_template, redirect, url_for, request, jsonify
 from app import app, db 
 from app.helpers import create_user, user_exists
+from flask_login import current_user, login_user, logout_user
 
 @app.route('/')
 def home():
@@ -49,5 +50,12 @@ def login():
         return jsonify({"status": "error",
                         "message":"Invalid Credentials" }), 400
     
+    login_user(user)
     return jsonify({"status": "success",
                     "message": "Welcome back! {uname}"}), 200
+
+
+@app.route('/logout', methods = ['POST'])
+def logout():
+    logout_user()
+    return redirect(url_for('signin'))

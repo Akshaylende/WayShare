@@ -1,8 +1,9 @@
 from flask import Flask
-
+from flask_login import LoginManager
 
 db = {}
 app = Flask(__name__)
+
 
 def create_app():
     '''
@@ -14,7 +15,7 @@ def create_app():
     
     # Importing routes
     from app import routes
-    
+
     return app
 
-
+login_manager = LoginManager(app)
