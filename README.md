@@ -40,4 +40,4 @@ so far DB
 docker build -t wayshare-app .
 
 # Run the container
-docker run -p 5000:5050 wayshare-app
+docker run -p 5050:5000 wayshare-app
