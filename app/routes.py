@@ -26,14 +26,14 @@ def register():
     email = data.get('email')
     pswd = data.get('password')
     
-    new_user = user_exists(uname, email)
+    user = user_exists(uname, email)
     
-    if new_user:
+    if user:
         return jsonify({"status": "error", 
-                        "message": "User with username already exists"}), 400
+                        "message": "User with username or email already exists"}), 400
     else:
-        user = Registry(username = uname, email = email, password = pswd)
-        user.save()
+        new_user = Registry(username = uname, email = email, password = pswd)
+        User.save(new_user)
     
     return jsonify({"status": "success",
                     "message": "New User Created Successfully"}), 200
