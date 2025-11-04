@@ -1,46 +1,36 @@
 from app import app
-from app.models import Registry, User
+from app.models import Registry, User, Ride, Booking, Record
+from mongoengine.queryset.visitor import Q
 
 
+def user_exists(uname: str = None, email: str = None)->bool:
+    '''
+    This Function checks if the user exists with the set of fields or not
+    '''
+    if not email and not uname:
+        return False
 
-# def Initialise_dB() -> None:
-#     db['registry'] = []
-
-# def create_user(uname, email, pswd):
-#     '''
-#     This function creates a new user ensuring the unqiue user details
-#     '''
-#     if check_valid_user(uname, email) is False:
-#         return None
-
-#     user = {}
-#     user["username"] = uname
-#     user["email"] = email
-#     user["password"] = pswd
-
-#     return user
-
-
-# def check_valid_user(uname, email) -> bool:
-
-#     for user in db['registry']:
-#         if user['username'] == uname or user['email'] == email:
-#             return False 
-    
-#     return True
-
-def user_exists(email, uname)->bool:
-    
-    user = Registry.objects(email = email).first()
-    if user:
-        return True
-    user = Registry.objects(username = uname).first()
+    user = Registry.objects(Q(email = email) | Q(username = uname)).first()
     if user:
         return True
     return False
 
+
 def check_user_cred(email, pswd):
+    '''
+    This Function checks if the user exists with the set of credentials or not
+    '''
     user = Registry.objects(email = email, password = pswd).first()
     if user:
         return True
     return False
+
+def create_new_user(email):
+    '''
+    This Function checks if the user exists, if it doesnot then creates a new user
+    '''
+    user = User.objects(email = email).first()
+    if not user:
+        user =  Registry.objects(email = email).first()
+        new_user = User(email = user.email, username = user.username)
+        new_user.save()
