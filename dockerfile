@@ -22,7 +22,7 @@ ENV FLASK_APP=run.py
 ENV FLASK_ENV=production
 
 # Run the app with Gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "run:create_app"]
+#CMD ["gunicorn", "--bind", "0.0.0.0:5000", "run:create_app"]
 
 
 # CMD ["python", 'run.py']
