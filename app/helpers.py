@@ -29,7 +29,7 @@ from app.models import Registry, User
     
 #     return True
 
-def user_exists(email, uname)->bool:
+def user_exists(uname, email)->bool:
     
     user = Registry.objects(email = email).first()
     if user:
