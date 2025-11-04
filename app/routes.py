@@ -1,6 +1,9 @@
 from flask import app, render_template, redirect, url_for, request, jsonify
-from app import app, db 
-from app.helpers import create_user, user_exists
+from app import app
+from app.models import Registry, User
+from app.helpers import check_user_cred, user_exists
+
+
 
 @app.route('/')
 def home():
@@ -22,13 +25,15 @@ def register():
     uname = data.get('username')
     email = data.get('email')
     pswd = data.get('password')
-
-    new_user = create_user(uname, email, pswd)
-    if new_user is None:
+    
+    new_user = user_exists(uname, email)
+    
+    if new_user:
         return jsonify({"status": "error", 
                         "message": "User with username already exists"}), 400
     else:
-        db['registry'].append(new_user)
+        user = Registry(username = uname, email = email, password = pswd)
+        user.save()
     
     return jsonify({"status": "success",
                     "message": "New User Created Successfully"}), 200
@@ -45,9 +50,9 @@ def login():
     user = request.get_json()
     email = user['email']
     pwsd  = user['password']
-    if not user_exists(email, pwsd):
+    if not check_user_cred(email, pwsd):
         return jsonify({"status": "error",
                         "message":"Invalid Credentials" }), 400
     
     return jsonify({"status": "success",
-                    "message": "Welcome back! {uname}"}), 200
+                    "message": "Welcome back! {uname} "}), 200
