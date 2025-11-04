@@ -33,4 +33,4 @@ def create_new_user(email):
     if not user:
         user =  Registry.objects(email = email).first()
         new_user = User(email = user.email, username = user.username)
-        new_user.save()
+        User.save(new_user)
