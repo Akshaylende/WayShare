@@ -6,7 +6,7 @@ from app.helpers import check_user_cred, user_exists
 
 
 @app.route('/')
-def home():
+def land():
     return render_template('home.html')
 
 
@@ -56,3 +56,12 @@ def login():
     
     return jsonify({"status": "success",
                     "message": "Welcome back! {uname} "}), 200
+
+
+@app.route('/home')
+def home():
+    return render_template('home.html', title = 'Welcome')
+
+@app.route('/rides')
+def rides():
+    return render_template('rides.html', title = 'Available Rides')
