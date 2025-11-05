@@ -1,6 +1,13 @@
 from datetime import datetime
 from mongoengine import Document, StringField, DateTimeField, IntField, ReferenceField, EmailField, ListField
 from flask_login import UserMixin
+from app import login_manager
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.objects(id = user_id).first()
+
 
 
 # Registry Collection
