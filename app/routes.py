@@ -1,7 +1,8 @@
 from flask import app, render_template, redirect, url_for, request, jsonify
 from app import app
 from app.models import Registry, User
-from app.helpers import check_user_cred, user_exists
+from app.helpers import check_user_cred, user_exists, get_user, get_rides
+from flask_login import current_user, login_required, login_user, logout_user
 
 
 
@@ -54,9 +55,15 @@ def login():
         return jsonify({"status": "error",
                         "message":"Invalid Credentials" }), 400
     
+    user = get_user(email)
+    login_user(user)
     return jsonify({"status": "success",
                     "message": "Welcome back! {uname} "}), 200
 
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('signin'))
 
 @app.route('/home')
 def home():
@@ -64,4 +71,5 @@ def home():
 
 @app.route('/rides')
 def rides():
-    return render_template('rides.html', title = 'Available Rides')
+    rides = get_rides()
+    return render_template('rides.html', title = 'Available Rides', rides = rides)
