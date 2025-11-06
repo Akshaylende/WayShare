@@ -8,7 +8,7 @@ from flask_login import current_user, login_required, login_user, logout_user
 
 @app.route('/')
 def land():
-    return render_template('home.html')
+    return render_template('land.html')
 
 
 @app.route('/sign-up', methods = ['GET'])
@@ -66,10 +66,11 @@ def logout():
     return redirect(url_for('signin'))
 
 @app.route('/home')
+@login_required
 def home():
     return render_template('home.html', title = 'Welcome')
 
 @app.route('/rides')
-def rides():
+def avail_rides():
     rides = get_rides()
     return render_template('rides.html', title = 'Available Rides', rides = rides)

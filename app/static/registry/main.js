@@ -34,7 +34,7 @@ if (signinform) {
                 console.log('Success:', result);
                 
                 signinform.reset(); // Clear the form fields
-                window.location.href = '/';
+                window.location.href = '/home';
             } else {
                 // If the server returned an error (e.g., status 400, 500)
                 const error = await response.json();
