@@ -1,7 +1,7 @@
 from flask import app, render_template, redirect, url_for, request, jsonify
 from app import app
 from app.models import Registry, User
-from app.helpers import check_user_cred, user_exists, get_user, get_rides
+from app.helpers import check_user_cred, user_exists, get_user, get_rides, create_new_ride
 from flask_login import current_user, login_required, login_user, logout_user
 
 
@@ -74,3 +74,15 @@ def home():
 def avail_rides():
     rides = get_rides()
     return render_template('rides.html', title = 'Available Rides', rides = rides)
+
+@app.route('/share-ride')
+@login_required
+def share_a_ride():
+    return render_template('newRide.html', title = 'New Ride')
+
+@app.route('/newride', methods = ['POST'])
+def new_ride():
+    data = request.form
+    # user = get_user(current_user)
+    ride = create_new_ride(data, current_user)
+    return redirect(url_for('home'))

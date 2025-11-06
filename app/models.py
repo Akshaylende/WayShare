@@ -1,5 +1,5 @@
 from datetime import datetime
-from mongoengine import Document, StringField, DateTimeField, IntField, ReferenceField, EmailField, ListField
+from mongoengine import Document, StringField, DateTimeField, IntField, ReferenceField, EmailField, ListField, FloatField, DateField
 from flask_login import UserMixin
 from app import login_manager
 
@@ -28,10 +28,10 @@ class User(Document, UserMixin):
     username = StringField(required=True, unique=True)
     email = EmailField(required=True, unique=True)
     profession = StringField()
-    preferences = StringField()
-    vehicle_details = StringField()
+    preferences = ListField(StringField())
+    vehicle_details = ListField(StringField())
     created_at = DateTimeField(default=datetime.utcnow)
-    ratings = 0
+    ratings = IntField()
     
     def get_id(self):
         return str(self.id)
@@ -43,12 +43,14 @@ class Ride(Document):
         owner =  ReferenceField(User, required = True) # link to User.id
         origin = StringField(required = True)
         destination = StringField(required = True)
-        time = DateTimeField(required = True, default=datetime.utcnow)
-        price = IntField(required = True)
+        date = DateField(required = True)
+        time = StringField(required = True)
+        price = FloatField(required = True, min_value = 0)
         seats_available = IntField(required = True)
         car_details = StringField(required = True)
+        notes = StringField()
         created_at = DateTimeField(default=datetime.utcnow)
-        notes = ListField(StringField())
+        
 
 # Booking collection
 class Booking:
