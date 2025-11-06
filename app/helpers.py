@@ -42,3 +42,11 @@ def create_new_user(email):
         user =  Registry.objects(email = email).first()
         new_user = User(email = user.email, username = user.username)
         User.save(new_user)
+
+
+def create_new_ride(data, user):
+    print(data)
+    ride =  Ride(owner = user, origin = data['origin'], destination = data['destination'], date = data['departure_date'], time = data['departure_time'], seats_available = data['available_seats'], price = data['price'], car_details = data['car_details'], notes = data['notes'])
+    # ride.notes = data['notes']
+    # Ride.save(ride)
+    return True
