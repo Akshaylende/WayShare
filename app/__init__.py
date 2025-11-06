@@ -1,9 +1,9 @@
 from flask import Flask
 from mongoengine import connect
-
+from flask_login import LoginManager
 
 app = Flask(__name__)
-
+login_manager = LoginManager(app)
 def create_app():
     '''
     Application factory function.
@@ -18,6 +18,7 @@ def create_app():
         host = "mongodb+srv://akshaylende2408_db_user:HMIbHKzx97BViQhB@cluster0.a2namms.mongodb.net/" 
     )
 
+    
     # Importing routes
     from app import routes
     
