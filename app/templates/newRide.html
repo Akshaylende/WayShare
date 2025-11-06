@@ -1,0 +1,93 @@
+{% extends 'template.html' %}
+{% block content %}
+<main class="flex-shrink-0 py-4">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- The Form Card -->
+                <div class="card shadow-lg border-0">
+                    <div class="card-body p-4 p-md-5">
+                        <form action="/newride" method="POST">
+
+                            <!-- Origin & Destination -->
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <label for="origin" class="form-label">Origin (Starting From)</label>
+                                    <input type="text" class="form-control" id="origin" name="origin"
+                                        placeholder="e.g., Downtown" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="destination" class="form-label">Destination (Going To)</label>
+                                    <input type="text" class="form-control" id="destination" name="destination"
+                                        placeholder="e.g., Airport" required>
+                                </div>
+                            </div>
+
+                            <!-- Date & Time -->
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <label for="departure_date" class="form-label">Departure Date</label>
+                                    <input type=date class="form-control" id="departure_date" name="departure_date"
+                                        required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="departure_time" class="form-label">Departure Time</label>
+                                    <input type="time" class="form-control" id="departure_time" name="departure_time"
+                                        required>
+                                </div>
+                            </div>
+
+                            <!-- Seats & Price -->
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <label for="available_seats" class="form-label">Available Seats</label>
+                                    <input type=number class="form-control" id="available_seats"
+                                        name="available_seats" min="1" value="1" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="price" class="form-label">Price per Seat ($)</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input type=number class="form-control" id="price" name="price" min="0"
+                                            step="0.01" value="10.00" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Car Details (Dropdown) -->
+                            <div class="mb-3">
+                                <label for="car_details" class="form-label">Car Details</label>
+                                <select class="form-select" id="car_details" name="car_details" required>
+                                    <option value="" selected>Please select from the available options</option>
+                                     {% for vehicle in current_user['vehicle_details'] %}
+                                        <option value="{{vehicle}}">{{vehicle}}</option>
+                                    {% endfor %} 
+                                </select>
+                                <div class="form-text">You can add color/model in the notes.</div>
+                            </div>
+
+                            <!-- Ride Notes (Textarea) -->
+                            <div class="mb-3">
+                                <label for="ride_notes" class="form-label"> Ride Notes </label>
+                                <textarea type="text" class="form-control" id="ride_notes" name="notes" rows="3"
+                                    placeholder="e.g., No smoking, 1 small bag only, call upon arrival..."></textarea>
+                                <div class="form-text">Any special rules or instructions for passengers.</div>
+                            </div>
+                            <div class="mb-3">
+                                <input type="checkbox" id="terms" name="terms" required>
+                                <label for="terms">I agree to the terms and conditions</label>
+                            </div>
+                            <!-- Submit Button -->
+                            <div classd="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg w-100">
+                                    Post My Ride
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock content %}
