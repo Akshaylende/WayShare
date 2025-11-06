@@ -1,0 +1,15 @@
+{% extends "template.html" %}
+{% block content %}
+    {% if rides|length == 0 %}
+        <p style="text-align:center;">No Rides are available</p>
+    {% endif %}
+    
+    {% for ride in rides %}
+    <pre>
+        {{ ride.id }}
+        {{ ride.origin }} -> {{ ride.destination }}
+        {{ ride.time }}
+    </pre>
+    {% endfor %}
+
+{% endblock content %}
