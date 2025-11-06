@@ -2,6 +2,14 @@ from app import app
 from app.models import Registry, User, Ride, Booking, Record
 from mongoengine.queryset.visitor import Q
 
+def get_user(email):
+    user = User.objects(email = email).first()
+    return user if user else None
+
+
+def get_rides():
+    rides = Ride.objects.all()
+    return rides
 
 def user_exists(uname: str = None, email: str = None)->bool:
     '''
