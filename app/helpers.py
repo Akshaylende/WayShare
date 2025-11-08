@@ -42,6 +42,8 @@ def create_new_user(email):
         user =  Registry.objects(email = email).first()
         new_user = User(email = user.email, username = user.username)
         User.save(new_user)
+    user = User.objects(email = email).first()
+    return user
 
 
 def create_new_ride(data, user):
