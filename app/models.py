@@ -1,5 +1,5 @@
 from datetime import datetime
-from mongoengine import Document, StringField, DateTimeField, IntField, ReferenceField, EmailField, ListField, FloatField, DateField
+from mongoengine import Document, StringField, DateTimeField, IntField, ReferenceField, EmailField, ListField, FloatField, DateField, BooleanField
 from flask_login import UserMixin
 from app import login_manager
 
@@ -32,6 +32,8 @@ class User(Document, UserMixin):
     vehicle_details = ListField(StringField())
     created_at = DateTimeField(default=datetime.utcnow)
     ratings = IntField()
+    location = StringField(default = 'INDIA')
+    verification = BooleanField(default = False)
     
     def get_id(self):
         return str(self.id)
