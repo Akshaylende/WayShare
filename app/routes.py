@@ -1,7 +1,7 @@
 from flask import app, render_template, redirect, url_for, request, jsonify
 from app import app
 from app.models import Registry, User
-from app.helpers import check_user_cred, user_exists, get_user, get_rides, create_new_ride
+from app.helpers import check_user_cred, user_exists, get_user, get_rides, create_new_ride, create_new_user
 from flask_login import current_user, login_required, login_user, logout_user
 
 
@@ -56,6 +56,8 @@ def login():
                         "message":"Invalid Credentials" }), 400
     
     user = get_user(email)
+    if user is None:
+        user = create_new_user(email)
     login_user(user)
     return jsonify({"status": "success",
                     "message": "Welcome back! {uname} "}), 200
