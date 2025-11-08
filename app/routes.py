@@ -88,3 +88,7 @@ def new_ride():
     # user = get_user(current_user)
     ride = create_new_ride(data, current_user)
     return redirect(url_for('home'))
+
+@app.route('/user')
+def profile():
+    return render_template('profile.html', user = current_user)

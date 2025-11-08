@@ -1,0 +1,142 @@
+{% extends 'template.html' %}
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WayShare - profile </title>
+  <link rel="stylesheet" type="text/css" href="../static/profile/style.css">
+</head>
+<body> -->
+{% block content %}
+<div class= "b1">
+ 
+
+  <div class="container1" >
+    <main class="main-content">
+      
+      <!-- === Profile Header Section === -->
+      <div class="profile-section">
+        <div class="profile-image">
+          <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Profile Picture">
+        </div>
+
+        <div class="profile-info">
+          <div class="profile-header">
+            <h1 class="profile-name">{{user.name}}</h1>
+            {% if user.verification %}
+            
+            <span class="verified-badge">
+                    ✓ Verified
+            </span>
+                   
+            {% endif %}
+            
+          </div>
+          <!-- Username Field -->
+          <div class="username">Username - @{{user.username}}</div>
+          <div class="location">Location📍- {{user.location}}</div>
+          
+          <!-- Profession Field -->
+          <div class="profession" id="user-profession">Profession - {{user.profession}}</div>
+
+          <!-- Rating Field -->
+          <div class="rating">
+            <span class="rating-text">Driver Rating</span>
+            <div class="rating-value">
+              <span class="rating-number">{{user.ratings}}/5.0</span>
+              <div class="stars">
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled" style="opacity: 0.3">★</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-buttons">
+            <button class="btn btn-primary">Send Message</button>
+            <button class="btn btn-secondary">View Contacts</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- === Main Content Grid === -->
+      <div class="content-grid">
+
+        <!-- Left Column -->
+        <div class="grid-column">
+            
+            <!-- Vehicle Details (Array Representation) -->
+            <section class="section">
+                <h3 class="section-title">Registered Vehicles (<span id="vehicle-count">0</span>) </h3>
+                <div class="vehicle-list">
+                    {% for vehicle in user.vehicle_details %}
+                    <!-- Vehicle 1 -->
+                    <div class="vehicle-item">
+                        <div class="vehicle-name">
+                            {{vehicle}}
+                            <span class="vehicle-badge">{{vehicle.primary}}</span>
+                        </div>
+                        <div class="vehicle-details">
+                            <div class="vehicle-detail">Plate: <strong>ABC-1234</strong></div>
+                            <div class="vehicle-detail">Color: <strong>Silver</strong></div>
+                            <div class="vehicle-detail">Seats: <strong> 4 </strong></div>
+                            <div class="vehicle-detail">Type: <strong> SUV </strong></div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+
+        <!-- Right Column -->
+        <div class="grid-column">
+            
+            <!-- Basic & Contact Info -->
+            <section class="section">
+                <h3 class="section-title">Personal Details</h3>
+                <div class="info-list">
+                    <div class="info-item">
+                        <span class="info-label">Email</span>
+                        <span class="info-value">{{user.email}}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Phone</span>
+                        <span class="info-value">{{user.phone}}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Member Since</span>
+                        <span class="info-value" id = "joined-date" data-timestamp = {{user.created_at}}><span id="joined"></span></span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Total Rides</span>
+                        <span class="info-value">3,421</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ride Preferences -->
+            <section class="section" style="margin-top: 40px;">
+                <h3 class="section-title">Ride Preferences (<span id="pref-count">0</span>)</h3>
+                <div class="pref-tags">
+                    {% for pref in user.preferences %}
+                        <span class="pref-tag">{{pref}}</span>
+                    {% endfor %}
+                </div>
+            </section>
+
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+  <!-- JavaScript from your script.js (simplified for this view) -->
+  <script src='../static/profile/script.js'>
+  </script>
+</div>
+{% endblock %}
+<!-- </body>
+</html> -->
