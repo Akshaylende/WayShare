@@ -28,7 +28,11 @@
                         <a class="nav-link" aria-current="page" href="{{url_for('avail_rides')}}">Get Rides</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Share Ride</a>
+                        {% if current_user.is_authenticated %}
+                            <a class="nav-link" href="{{url_for('share_a_ride')}}">Share Ride</a>
+                        {% else %}
+                            <a class="nav-link" href="{{url_for('signin')}}">Share Ride</a>
+                        {% endif %}
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">About You</a>
@@ -48,4 +52,5 @@
 
     {% endblock %}
 </body>
+    <script src='../static/main.js'></script>
 </html>
