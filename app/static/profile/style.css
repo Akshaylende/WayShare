@@ -22,6 +22,38 @@
       border-radius: 16px;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
       overflow: hidden;
+      position: relative;
+    }
+    
+    .edit-btn2 {
+        position: absolute;
+        top: 32px;
+        right: 32px;
+        left: auto; /* Explicitly prevent it from sticking to the left */
+        padding: 8px 16px;
+        background-color: #F3F4F6;
+        color: #374151;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s;
+        border: none;
+        z-index: 100; /* Increased z-index just in case */
+    }
+    .edit-btn2:hover {
+        background-color: #E5E7EB;
+        color: #111827;
+    }
+    .edit-btn2 svg {
+        width: 16px;
+        height: 16px;
+        stroke: currentColor;
+        stroke-width: 2;
+        fill: none;
     }
 
     /* --- Main Content & Profile Header --- */
