@@ -1,15 +1,95 @@
-{% extends "template.html" %}
+{% extends 'template.html' %}
 {% block content %}
-    {% if rides|length == 0 %}
-        <p style="text-align:center;">No Rides are available</p>
-    {% endif %}
-    
-    {% for ride in rides %}
-    <pre>
-        {{ ride.id }}
-        {{ ride.origin }} -> {{ ride.destination }}
-        {{ ride.time }}
-    </pre>
-    {% endfor %}
+<div class="b2">
+    <div class="container2">
 
-{% endblock content %}
+        <h1 class="page-title">Find a Ride</h1>
+
+        <div class="feed-layout">
+
+            <!-- === LEFT SIDEBAR: Search Filters === -->
+            <aside class="sidebar">
+                <h2 class="sidebar-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="4" y1="21" x2="4" y2="14"></line>
+                        <line x1="4" y1="10" x2="4" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12" y2="3"></line>
+                        <line x1="20" y1="21" x2="20" y2="16"></line>
+                        <line x1="20" y1="12" x2="20" y2="3"></line>
+                        <line x1="1" y1="14" x2="7" y2="14"></line>
+                        <line x1="9" y1="8" x2="15" y2="8"></line>
+                        <line x1="17" y1="16" x2="23" y2="16"></line>
+                    </svg>
+                    Filter Rides
+                </h2>
+
+                <!-- Placeholder for future filters -->
+                
+                <div class="search-group">
+                    <label class="search-label">Date</label>
+                    <input type="date" class="search-input" id="search-input-date">
+                </div>
+               
+                <div class="search-group">
+                    <label class="search-label" for="search-input">Destination City</label>
+                    <input type="text" id="search-input" class="search-input"
+                        placeholder="e.g. Boston, Philadelphia...">
+                </div>
+
+                <button class="search-btn" onclick="filterRides()">Apply Filters</button>
+            </aside>
+
+            <!-- === CENTER/RIGHT: Main Feed === -->
+            <main class="main-feed">
+                <div class="rides-list" id="rides-list" data-rides ={{rides}}>
+                    {% for ride in rides %}
+                    <!-- Ride Card 1 -->
+                    <a href="ride_details.html?id=1" class="ride-card" data-destination="Boston">
+                        <div class="ride-header">
+                            <div class="driver-info">
+                                <img src="https://i.pravatar.cc/150?img=3" alt="Driver" class="driver-img">
+                                <div class="driver-details">
+                                    <span class="driver-name">{{ride.owner.name}}</span>
+                                    <!-- <span class="ride-rating"><span class="star">★</span> {{ride.owner.ratings}} ({{ride.count}} rides)</span> -->
+                                    <span class="ride-rating"><span class="star">★</span> {{ride.owner.ratings}} (120 rides)</span>
+                                </div>
+                            </div>
+                            <div class="ride-price">${{ride.price}}</div>
+                        </div>
+                        <div class="ride-route">
+                            <div class="route-point">
+                                <span class="point-label">Origin</span>
+                                <span class="point-val">{{ride.origin}}</span>
+                            </div>
+                            <div class="route-point" style="margin-top: 12px;">
+                                <span class="point-label">Destination</span>
+                                <span class="point-val">{{ride.destination}}</span>
+                            </div>
+                        </div>
+                        <div class="ride-footer">
+                            <div class="ride-time" data-date={{ride.date}} data-time={{ride.time}}> Loading Time...</div>
+                            <div class="seats-left">{{ride.seats_available}} seats left</div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div><!-- End rides-list -->
+
+                <!-- Empty state message -->
+                <div id="no-rides-msg"
+                    style="display: none; text-align: center; color: white; margin-top: 40px; font-size: 18px; background: rgba(0,0,0,0.1); padding: 20px; border-radius: 12px;">
+                    No rides found matching your filters.
+                </div>
+                <div class="pagination-controls" id="pagination-controls">
+                    <button class="page-btn" id="prev-page" disabled>Previous</button>
+                    <span class="page-info" id="page-info">Page 1 of X</span>
+                    <button class="page-btn" id="next-page">Next</button>
+                </div>
+
+            </main>
+
+        </div> <!-- End feed-layout -->
+    </div>
+</div>
+{% endblock %}
