@@ -1,6 +1,19 @@
 ## WayShare
 
 
+The web app is under development is in inprogress state. Some features have just basic Alert handling as that feature is yet to be released. 
+you can check it out live on  - https://wayshare.onrender.com/
+
+
+
+
+
+
+
+
+
+
+
 
 
 Steps Took - 
