@@ -37,12 +37,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const count = document.querySelectorAll('.vehicle-item').length;
 
         // 4. Update the text content of the span with the new count
-        vehicleCountSpan.textContent = count;
+        if(vehicleCountSpan)
+            vehicleCountSpan.textContent = count;
 
         const prefCountSpan = document.getElementById('pref-count');
         // console.log(prefCountSpan)
         const count1 = document.querySelectorAll('.pref-tag').length;
-        prefCountSpan.textContent = count1
+        if(prefCountSpan)
+            prefCountSpan.textContent = count1
 
 
 
