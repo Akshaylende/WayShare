@@ -90,5 +90,6 @@ def new_ride():
     return redirect(url_for('home'))
 
 @app.route('/user')
+@login_required
 def profile():
     return render_template('profile.html', user = current_user)
