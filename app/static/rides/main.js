@@ -30,10 +30,14 @@ function filterRides(){
 
 
 
+let filter_button = document.getElementById('search-input')
 
-document.getElementById('search-input').addEventListener('keyup', function () {
+if(filter_button){
+    filter_button.addEventListener('keyup', function () {
     filterRides();
-});
+    });
+}
+
 
 function formatDateTime(dateStr, timeStr) {
     const date = new Date(`${dateStr}T${timeStr}`);
