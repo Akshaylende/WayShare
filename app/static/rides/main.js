@@ -146,3 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
     formatAllRideTimes();
     applyFilterAndPagination(); // Initial load (shows page 1 of all rides)
 });
+
+
+function onRideClick(){
+    alert('This feature is in development phase and will be released on 11-11-2025')
+}
