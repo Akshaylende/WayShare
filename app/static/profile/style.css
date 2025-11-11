@@ -17,7 +17,7 @@
 
     .container1 {
       width: 100%;
-      max-width: 65%;
+      max-width: 75%;
       background: white;
       border-radius: 16px;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
@@ -27,8 +27,8 @@
     
     .edit-btn2 {
         position: absolute;
-        top: 32px;
-        right: 32px;
+        top: 26px;
+        right: 26px;
         left: auto; /* Explicitly prevent it from sticking to the left */
         padding: 8px 16px;
         background-color: #F3F4F6;
@@ -188,7 +188,7 @@
     }
 
     .btn {
-        padding: 12px 24px;
+        padding: 10px 24px;
         border-radius: 8px;
         font-size: 14px;
         font-weight: 600;
@@ -350,6 +350,9 @@
       }
       .rating {
           align-items: center;
+      }
+      .container1{
+        max-width: 100%;
       }
       .content-grid {
           grid-template-columns: 1fr;
