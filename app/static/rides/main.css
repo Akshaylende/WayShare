@@ -279,11 +279,15 @@
     flex-direction: column;
   }
   .sidebar {
-    width: 100%;
+    width: 95%;
     flex: none;
     position: static; /* Removes sticky on mobile */
   }
   .main-feed {
+    max-width: 95%;
+    margin-left: 1%;
+  }
+  .container2{
     max-width: 100%;
   }
 }
