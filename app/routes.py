@@ -8,7 +8,7 @@ from flask_login import current_user, login_required, login_user, logout_user
 
 @app.route('/')
 def land():
-    return render_template('land.html')
+    return render_template('landing.html', title ='Share Rides along the Route')
 
 
 @app.route('/sign-up', methods = ['GET'])

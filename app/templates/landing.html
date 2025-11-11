@@ -1,0 +1,127 @@
+{% extends 'template.html' %}
+{% block content %}
+<main>
+
+    <section class="hero">
+        <div class="hero-overlay"></div>
+
+        <!-- Auth Buttons REMOVED from top -->
+
+        <div class="container">
+
+            <h1>Share Your Ride, Save Your Wallet</h1>
+            <p>The easiest way to find and offer rides. Join the Wayshare community today.</p>
+
+            <!-- Auth Buttons MOVED here -->
+            <div class="hero-auth-buttons">
+                <a href="{{ url_for('signin') }}" class="btn1 btn-login">Log In</a>
+                <a href="{{ url_for('signup')}}" class="btn1 btn-primary">Sign Up</a>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2>How Wayshare Works</h2>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                        </svg>
+                    </div>
+                    <h3>1. Search for a Ride</h3>
+                    <p>Enter your destination and find drivers already heading that way.</p>
+                </div>
+                <div class="step">
+                    <div class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                            <path
+                                d="M12.736 3.546a.5.5 0 0 0-.707 0l-7.5 7.5a.5.5 0 0 0 .707.707L12.736 4.253a.5.5 0 0 0 0-.707z" />
+                            <path d="M6.646 6.646a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0z" />
+                        </svg>
+                    </div>
+                    <h3>2. Book Your Seat</h3>
+                    <p>Choose your ride, review the driver's profile, and book your spot.</p>
+                </div>
+                <div class="step">
+                    <div class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                            <path
+                                d="M11.586 3.842A.5.5 0 0 1 12.5 4v7.5a.5.5 0 0 1-1 0V4.414L3.414 12.5a.5.5 0 0 1-.707 0L1.5 11.207a.5.5 0 0 1 0-.707L10.586 2.5H4.5a.5.5 0 0 1 0-1h7.086a.5.5 0 0 1 .5.342z" />
+                        </svg>
+                    </div>
+                    <h3>3. Share the Journey</h3>
+                    <p>Meet your driver, enjoy the trip, and save money together.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2>What Our Riders Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p class="quote">"Using Wayshare cut my commute costs in half! Plus, I've met some great people.
+                        Highly recommend."</p>
+                    <p class="author">- Sarah K., Mumbai</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="quote">"As a driver, it's so easy. I just post my ride, and the app handles the rest. The
+                        extra money for gas is a huge bonus."</p>
+                    <p class="author">- Rohan P., Delhi</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="quote">"I was nervous about carpooling at first, but the verified profiles made me feel
+                        safe. It's my go-to for weekend trips now."</p>
+                    <p class="author">- Priya G., Bangalore</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Why Ride with Us?</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3>💰 Save Money</h3>
+                    <p>Share the cost of travel. It's that simple. Drivers cover their gas, riders get a cheap trip.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>🌍 Eco-Friendly</h3>
+                    <p>Fewer cars on the road means a smaller carbon footprint. Good for you, good for the planet.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>🛡️ Verified & Safe</h3>
+                    <p>We verify driver profiles and review all members, so you can travel with peace of mind.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Start Sharing?</h2>
+            <a href="{{url_for('signup')}}" class="btn1 btn-secondary signup-btn">Sign Up for Free</a>
+        </div>
+    </section>
+
+</main>
+
+<footer class="main-footer">
+    <div class="container">
+        <ul class="footer-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Help Center</a></li>
+        </ul>
+        <p>&copy; 2025 Wayshare. All rights reserved.</p>
+    </div>
+</footer>
+{% endblock content %}
