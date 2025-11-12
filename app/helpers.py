@@ -52,3 +52,7 @@ def create_new_ride(data, user):
     # ride.notes = data['notes']
     # Ride.save(ride)
     return True
+
+def get_ride(ride_id):
+    ride = Ride.objects(id = ride_id).first()
+    return ride if ride else None

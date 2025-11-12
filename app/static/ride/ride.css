@@ -1,0 +1,358 @@
+
+        /* --- Base Styles (from user_profile_redesigned.html) --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .b3 { /* Using profile page's body class */
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #1f2937;
+        }
+
+        .container3 { /* Using profile page's container class */
+            width: 100%;
+            max-width: 80%; /* Consistent width */
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* --- Map Placeholder (Revised) --- */
+        .ride-map-placeholder {
+            width: 100%;
+            height: 250px;
+            background: #e0e0e0 url('https://placehold.co/800x400/e0e0e0/999?text=Route+Map+Goes+Here') center center/cover;
+            /* New styles for when it's inside the content area */
+            border-radius: 12px;
+            margin-bottom: 32px; /* Added spacing */
+            overflow: hidden; /* Ensures radius clips the image */
+        }
+
+        /* --- Main Content Padding --- */
+        .main-content3 {
+            padding: 32px;
+        }
+        
+        /* --- Back Button --- */
+        .back-link {
+            display: inline-block;
+            color: #4A90E2;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 20px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+        .back-link:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        /* --- Two-Column Flex Layout --- */
+        .ride-detail-layout {
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .ride-main-content { /* Left Column */
+            flex: 2; /* Takes up 2/3 of space */
+            min-width: 0; /* Prevents flex overflow */
+        }
+
+        .ride-sidebar { /* Right Column */
+            flex: 1; /* Takes up 1/3 of space */
+            min-width: 0; /* Prevents flex overflow */
+            position: sticky; /* Makes sidebar sticky on scroll */
+            margin-right: 3%;
+            top: 32px;
+        }
+        
+        .section-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: #9CA3AF;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #E5E7EB;
+            margin-left: 12px;
+        }
+        
+        /* --- Ride Info (Left Column) --- */
+        .ride-header {
+            font-size: 28px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .ride-time {
+            font-size: 18px;
+            font-weight: 600;
+            color: #4A90E2;
+            margin-bottom: 24px;
+        }
+        
+        .ride-route {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding-left: 20px;
+            border-left: 3px solid #E5E7EB;
+            margin: 16px 0 24px 10px;
+            position: relative;
+        }
+        .ride-route::before, .ride-route::after {
+            content: '';
+            position: absolute;
+            left: -8px;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #4A90E2;
+        }
+        .ride-route::before { top: -2px; }
+        .ride-route::after { bottom: -2px; border-color: #059669; }
+
+        .route-point {
+            display: flex;
+            flex-direction: column;
+        }
+        .point-label { font-size: 12px; color: #9CA3AF; font-weight: 600; letter-spacing: 0.5px; }
+        .point-val { font-weight: 600; font-size: 18px; }
+
+        /* --- Booking Summary Section --- */
+        .booking-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f9fafb;
+            border: 1px solid #f3f4f6;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 24px;
+        }
+        .price-display h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #6B7280;
+            margin-bottom: 4px;
+        }
+        .price-display p {
+            font-size: 28px;
+            font-weight: 800;
+            color: #059669; /* Green for price */
+        }
+        .seats-display h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #6B7280;
+            margin-bottom: 4px;
+            text-align: right;
+        }
+        .seats-display p {
+            font-size: 28px;
+            font-weight: 800;
+            color: #111827;
+        }
+
+        /* --- NEW: Booking Action Row --- */
+        .booking-action-row {
+            display: flex;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .seat-stepper {
+            display: flex;
+            align-items: center;
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .seat-stepper button {
+            background: #F9FAFB;
+            border: none;
+            padding: 0 16px;
+            height: 100%;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: 600;
+            color: #4A90E2;
+            transition: background 0.2s;
+        }
+        .seat-stepper button:hover {
+            background: #F3F4F6;
+        }
+        .seat-stepper button:disabled {
+            color: #D1D5DB;
+            cursor: not-allowed;
+            background: #F9FAFB;
+        }
+        .seat-stepper input {
+            width: 50px;
+            text-align: center;
+            border: none;
+            font-size: 18px;
+            font-weight: 700;
+            color: #111827;
+            padding: 14px 0;
+        
+        }
+        /* Hide arrows from number input */
+        .seat-stepper input::-webkit-outer-spin-button,
+        .seat-stepper input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .book-button {
+            flex-grow: 1; /* Button fills remaining space */
+            padding: 16px;
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            background: #059669; /* Green for "Book" */
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 0; /* Resets margin */
+        }
+        .book-button:hover {
+            background: #047857;
+        }
+
+        /* --- Sidebar Cards (Right Column) --- */
+        .sidebar-card {
+            background: #F9FAFB;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #E5E7EB;
+            margin-bottom: 24px; /* Space between cards */
+        }
+        
+        /* Driver Info Card */
+        .driver-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: inherit;
+        }
+        .driver-img {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #eee;
+        }
+        .driver-details {
+            display: flex;
+            flex-direction: column;
+        }
+        .driver-name { font-weight: 700; font-size: 18px; }
+        .ride-rating { font-size: 14px; color: #6B7280; display: flex; align-items: center; gap: 4px; }
+        .star { color: #FBBF24; }
+
+        .ride-info{
+            max-width: 80%;
+            margin-left: 5%;
+        }
+        /* Vehicle & Preferences Cards */
+        .info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 15px;
+        }
+        .info-label { color: #6B7280; }
+        .info-value { font-weight: 600; color: #111827; }
+
+        /* --- REVISED: Driver Note Style --- */
+        .driver-note-main {
+            /* This section is no longer a card */
+            margin-top: 24px;
+            margin-bottom: 24px;
+        }
+        .driver-note-text {
+            font-size: 15px;
+            color: #374151;
+            line-height: 1.6;
+            font-style: italic;
+            background: #F9FAFB;
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid #E5E7EB;
+        }
+
+        .pref-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .pref-tag {
+            font-size: 13px;
+            padding: 6px 12px;
+            background: #E5E7EB;
+            color: #374151;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+        .pref-tag.positive { background: #ECFDF5; color: #065F46; }
+
+        /* --- Responsive --- */
+        @media (max-width: 1024px) {
+            .ride-detail-layout {
+                flex-direction: column;
+            }
+            .ride-sidebar {
+                position: static; /* Remove sticky on smaller screens */
+                width: 100%;
+            }
+        }
+        @media (max-width: 768px) {
+            .container1 {
+                max-width: 95%; /* Use 95% on mobile */
+            }
+            .main-content {
+                padding: 24px;
+            }
+            .ride-info{
+                max-width: 100%;
+            }
+            .seat-stepper{
+                max-width: min-content;
+                            overflow: hidden;
+
+            }
+            .booking-action-row {
+                flex-direction: column; /* Stack stepper and button on mobile */
+            }
+        }
+    

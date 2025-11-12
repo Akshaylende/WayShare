@@ -1,7 +1,7 @@
 from flask import app, render_template, redirect, url_for, request, jsonify
 from app import app
 from app.models import Registry, User
-from app.helpers import check_user_cred, user_exists, get_user, get_rides, create_new_ride, create_new_user
+from app.helpers import check_user_cred, user_exists, get_user, get_rides, create_new_ride, create_new_user,get_ride
 from flask_login import current_user, login_required, login_user, logout_user
 
 
@@ -93,3 +93,8 @@ def new_ride():
 @login_required
 def profile():
     return render_template('profile.html', user = current_user)
+
+@app.route('/ride/<string:ride_id>')
+def ride_details(ride_id):
+    ride = get_ride(ride_id)
+    return render_template('rideDetails.html', ride = ride)

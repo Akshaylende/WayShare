@@ -78,7 +78,7 @@ function formatAllRideTimes() {
 }
 
 // 3. Run it when the page loads
-document.addEventListener('DOMContentLoaded', formatAllRideTimes);
+document.addEventListener('DOMContentLoaded', formatAllRideTimes());
 
 
 let currentPage = 1;
