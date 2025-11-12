@@ -34,7 +34,7 @@
                
                 <div class="search-group">
                     <label class="search-label" for="search-input">Destination City</label>
-                    <input type="text" id="search-input" class="search-input"
+                    <input type="text" id="search-input-destination" class="search-input"
                         placeholder="e.g. Boston, Philadelphia...">
                 </div>
 
@@ -46,7 +46,7 @@
                 <div class="rides-list" id="rides-list" data-rides ={{rides}}>
                     {% for ride in rides %}
                     <!-- Ride Card 1 -->
-                    <a href="/ride/{{ride.id}}" class="ride-card" data-destination="Boston">
+                    <a href="/ride/{{ride.id}}" class="ride-card" >
                         <div class="ride-header">
                             <div class="driver-info">
                                 <img src="https://i.pravatar.cc/150?img=3" alt="Driver" class="driver-img">

@@ -1,42 +1,28 @@
-// function filterRides() {
-//     let input_date = document.getElementById('search-input-date').value;
-//     // const filter = input.value.toUpperCase();
-//     // const list = document.getElementById('r');
-//     const data = document.getElementById('rides-list');
-   
-//     const cards = data.getAttribute('data-rides');
-//     console.log(JSON.stringify(cards));
-//     let visibleCount = 0;
-//     input_date = input_date.split('-').reverse().join('-'); 
-//    for(let card of cards) {
-//         const destination = card.getAttribute('data-destination');
-//         if (destination && destination.toUpperCase().indexOf(filter) > -1) {
-//             card.style.display = ""; // Show
-//             visibleCount++;
-//         } else {
-//             card.style.display = "none"; // Hide
-//         }
-//     }
-//     document.getElementById('no-rides-msg').style.display = visibleCount === 0 ? 'block' : 'none';
-// }
+function filterRides() {
+    let input_date = document.getElementById('search-input-date').value;
+    if(input_date)
+        console.log(input_date);
+    let destination = document.getElementById('search-input-destination').value;
+    console.log(destination)
+
+    let base_url = `/rides`
+    if(input_date && destination){
+        base_url = `${base_url}?date=${input_date}&destination=${destination}`;
+    }
+    else if(input_date){
+        base_url = `${base_url}?date=${input_date}`;
+    }
+    else if(destination){
+        base_url = `${base_url}?destination=${destination}`
+    }
+    // alert(base_url);
+    window.location.href = base_url;
+}
 
 // Trigger search on 'Enter' key
 
 
-function filterRides(){
-    alert('This feature is yet to released. coming soon..!')
-}
-
-
-
-
 let filter_button = document.getElementById('search-input')
-
-if(filter_button){
-    filter_button.addEventListener('keyup', function () {
-    filterRides();
-    });
-}
 
 
 function formatDateTime(dateStr, timeStr) {
@@ -152,6 +138,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-function onRideClick(){
-    alert('This feature is in development phase and will be released on 11-11-2025')
-}
+// function onRideClick(){
+//     alert('This feature is in development phase and will be released on 11-11-2025')
+// }
