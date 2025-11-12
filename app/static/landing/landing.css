@@ -283,6 +283,10 @@ a {
 /* --- 8. Footer --- */
 .main-footer {
   padding: 50px 0;
+  position:relative;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   background-color: var(--dark-color);
   color: #aaa;
   text-align: center;
