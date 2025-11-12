@@ -1,0 +1,125 @@
+{% extends 'template.html' %}
+{% block content %}
+<div class="b3">
+    <div class="container3">
+
+        <main class="main-content3">
+
+            <!-- Back link to the feed -->
+            <a href="{{url_for('avail_rides')}}" class="back-link">
+                &larr; Back to all rides
+            </a>
+
+            <!-- Map placeholder MOVED here -->
+            <div class="ride-map-placeholder"></div>
+
+            <!-- Two-Column Flex Layout -->
+            <div class="ride-detail-layout">
+
+                <!-- === LEFT COLUMN: Ride Info & Booking === -->
+                <div class="ride-main-content">
+                    <section class="ride-info">
+                        <h1 class="ride-header">{{ride.origin}} to {{ride.destination}}</h1>
+
+                        <div class="ride-time format-me" data-date={{ride.date}} data-time={{ride.time}}>
+                            <!-- JS will format this --> Loading time...
+                        </div>
+
+                        <div class="ride-route">
+                            <div class="route-point">
+                                <span class="point-label">PICKUP</span>
+                                <span class="point-val">{{ride.origin}}</span>
+                            </div>
+                            <div class="route-point" style="margin-top: 16px;">
+                                <span class="point-label">DROP OFF</span>
+                                <span class="point-val">{{ride.destination}}</span>
+                            </div>
+                        </div>
+
+                        <!-- Booking Summary -->
+                        <div class="booking-summary">
+                            <div class="price-display">
+                                <h3>Price per seat</h3>
+                                <p>${{ride.price}}</p>
+                            </div>
+                            <div class="seats-display" id="seats-available">
+                                <h3>Availability</h3>
+                                <p>{{ride.seats_available}} Seats</p> <!-- This text will be read by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Driver's Note MOVED here -->
+                        <section class="driver-note-main">
+                            <h3 class="section-title" style="margin-bottom: 12px;">Rider Instructions</h3>
+                            <p class="driver-note-text">
+                                {{ride.notes}}
+                            </p>
+                        </section>
+
+                        <!-- Booking Action Row -->
+                        <div class="booking-action-row">
+                            <div class="seat-stepper">
+                                <button type="button" id="seat-minus" title="Decrease seats"
+                                    aria-label="Decrease seats">-</button>
+                                <input type="text" id="seat-count" value="1" readonly aria-label="Number of seats">
+                                <button type="button" id="seat-plus" title="Increase seats"
+                                    aria-label="Increase seats">+</button>
+                            </div>
+                            <button class="book-button" id="book-button">
+                                Book 1 Seat
+                            </button>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- === RIGHT COLUMN: Driver & Ride Details === -->
+                <aside class="ride-sidebar">
+
+                    <!-- Driver Card -->
+                    <section class="sidebar-card">
+                        <h3 class="section-title">Driver Details</h3>
+                        <a href="#" class="driver-info" title="View Profile">
+                            <img src="https://i.pravatar.cc/150?img=3" alt="Driver" class="driver-img">
+                            <div class="driver-details">
+                                <span class="driver-name">{{ride.owner.name}}</span>
+                                <span class="ride-rating"><span class="star">★</span>{{ride.owner.ratings}} (120
+                                    rides)</span>
+                            </div>
+                        </a>
+                    </section>
+
+                    <!-- Vehicle Card -->
+                    <section class="sidebar-card">
+                        <h3 class="section-title">Vehicle Details</h3>
+                        <div class="info-list">
+                            <div class="info-item">
+                                <span class="info-label">Vehicle</span>
+                                <span class="info-value">{{ride.car_details}}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Color</span>
+                                <span class="info-value">Silver</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Driver's Note Card (REMOVED from here) -->
+
+                    <!-- Preferences Card -->
+                    <section class="sidebar-card">
+                        <h3 class="section-title">Ride Preferences</h3>
+                        <div class="pref-tags">
+                            <span class="pref-tag positive">🎵 Music Friendly</span>
+                            <span class="pref-tag" style="background:#FEF2F2; color:#991B1B">🚭 No Smoking</span>
+                            <span class="pref-tag positive">🐾 Pet Friendly</span>
+                        </div>
+                    </section>
+
+                </aside>
+
+            </div>
+        </main>
+    </div>
+</div>
+
+{% endblock content %}
