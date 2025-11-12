@@ -7,8 +7,17 @@ def get_user(email):
     return user if user else None
 
 
-def get_rides():
-    rides = Ride.objects.all()
+def get_rides(date, dest):
+    rides = []
+    if date and dest:
+        rides = Ride.objects(date = date, destination = dest).all()
+    elif date:
+        rides = Ride.objects(date = date).all()
+    elif dest:
+        rides = Ride.objects(destination = dest).all()
+    else:
+        rides = Ride.objects().all()
+    # rides = [ride.to_json() for ride in rides]
     return rides
 
 def user_exists(uname: str = None, email: str = None)->bool:

@@ -74,7 +74,9 @@ def home():
 
 @app.route('/rides')
 def avail_rides():
-    rides = get_rides()
+    date = request.args.get('date')
+    dest = request.args.get('destination')      
+    rides = get_rides(date, dest)
     return render_template('rides.html', title = 'Available Rides', rides = rides)
 
 @app.route('/share-ride')
