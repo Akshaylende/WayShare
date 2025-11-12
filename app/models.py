@@ -37,22 +37,50 @@ class User(Document, UserMixin):
     
     def get_id(self):
         return str(self.id)
+    
+    def to_json(self):
+        return{
+            'name' : self.name,
+            'username' : self.username, 
+            'email' : self.email,
+            'profession': self.profession,
+            'preferences': self.preferences,
+            'vehicle_details' : self.vehicle_details,
+            'ratings' : self.ratings,
+            'location' : self.location,
+            'verification' : self.verification,
+            'created_at' : self.created_at
+        }
 
 
 # Ride collection
 class Ride(Document):
-        # id  = IntField(required = True, unique = True) 
-        owner =  ReferenceField(User, required = True) # link to User.id
-        origin = StringField(required = True)
-        destination = StringField(required = True)
-        date = DateField(required = True)
-        time = StringField(required = True)
-        price = FloatField(required = True, min_value = 0)
-        seats_available = IntField(required = True)
-        car_details = StringField(required = True)
-        notes = StringField()
-        created_at = DateTimeField(default=datetime.utcnow)
+    # id  = IntField(required = True, unique = True) 
+    owner =  ReferenceField(User, required = True) # link to User.id
+    origin = StringField(required = True)
+    destination = StringField(required = True)
+    date = DateField(required = True)
+    time = StringField(required = True)
+    price = FloatField(required = True, min_value = 0)
+    seats_available = IntField(required = True)
+    car_details = StringField(required = True)
+    notes = StringField()
+    created_at = DateTimeField(default=datetime.utcnow)
         
+
+    def to_json(self):
+        return{
+            'owner' : self.owner,
+            'origin' : self.origin,
+            'destination' : self.destination,
+            'date' : self.date,
+            'time' : self.time,
+            'price' : self.price,
+            'seats_available' : self.seats_available,
+            'car_details' : self.car_details,
+            'notes' : self.notes,
+            'created_at' : self.creat
+        }
 
 # Booking collection
 class Booking:
