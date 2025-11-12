@@ -104,30 +104,38 @@ document.addEventListener('DOMContentLoaded', formatRideTimes());
 
             // 2. Function to update button states and text
             function updateState() {
-                countInput.value = currentCount;
+                if (countInput)
+                    countInput.value = currentCount;
                 
                 // Update button text
-                bookBtn.textContent = `Book ${currentCount} Seat${currentCount > 1 ? 's' : ''}`;
+                if(bookBtn)
+                    bookBtn.textContent = `Book ${currentCount} Seat${currentCount > 1 ? 's' : ''}`;
                 
                 // Update disabled states
-                minusBtn.disabled = currentCount === 1;
-                plusBtn.disabled = currentCount === maxSeats;
+                if(minusBtn)
+                    minusBtn.disabled = currentCount === 1;
+                if(plusBtn)
+                    plusBtn.disabled = currentCount === maxSeats;
             }
 
             // 3. Add Click Listeners
-            plusBtn.addEventListener('click', () => {
-                if (currentCount < maxSeats) {
-                    currentCount++;
-                    updateState();
-                }
-            });
+            if(plusBtn){
+                plusBtn.addEventListener('click', () => {
+                    if (currentCount < maxSeats) {
+                        currentCount++;
+                        updateState();
+                    }
+                });
+            }
 
-            minusBtn.addEventListener('click', () => {
+            if(minusBtn){
+                minusBtn.addEventListener('click', () => {
                 if (currentCount > 1) {
                     currentCount--;
                     updateState();
                 }
-            });
+                });
+            } 
 
             // 4. Initial state
             updateState();
