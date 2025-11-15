@@ -1,52 +1,47 @@
 {% extends 'template.html' %}
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WayShare - profile </title>
-  <link rel="stylesheet" type="text/css" href="../static/profile/style.css">
-</head>
-<body> -->
 {% block content %}
-<div class= "b1">
- 
-
-  <div class="container1" >
-     <!-- Edit Button -->
-    <button class="edit-btn2" title="Edit Profile" onclick="alert('We are working on it and will be shipping it soon')">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-        </svg>
-        Edit
-    </button>
+<div class="b1">
+  <div class="container1">
     <main class="main-content">
-      
       <!-- === Profile Header Section === -->
+      <!-- REVISED: HTML structure for better flex alignment -->
       <div class="profile-section">
-        <div class="profile-image">
-          <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Profile Picture">
+
+        <!-- ITEM 1: Profile Image -->
+        <div class="profile-image-container">
+          <div class="profile-image">
+            <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=400"
+              alt="Profile Picture">
+          </div>
+          <button class="profile-image-edit-btn" title="Change picture" onclick="alert('Open file uploader...')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+          </button>
         </div>
 
-        <div class="profile-info">
+        <!-- ITEM 2: Profile Info (Grows) -->
+        <div class="profile-info" id="profile-info-section">
           <div class="profile-header">
-            <h1 class="profile-name">{{user.name}}</h1>
+            <h1 class="profile-name" id="display-name">{{user.name}}</h1>
+            <input type="text" class="inline-edit-name" id="input-name" value="{{user.name}}">
             {% if user.verification %}
-            
             <span class="verified-badge">
-                    ✓ Verified
+              ✓ Verified
             </span>
-                   
             {% endif %}
-            
           </div>
-          <!-- Username Field -->
+
           <div class="username">Username - @{{user.username}}</div>
-          <div class="location">Location📍- {{user.location}}</div>
-          
-          <!-- Profession Field -->
-          <div class="profession" id="user-profession">Profession - {{user.profession}}</div>
+
+          <div class="location" id="display-location">Location📍- {{user.location}}</div>
+          <input type="text" class="inline-edit-location" id="input-location" value="{{user.location}}">
+
+          <div class="profession" id="display-profession">Profession - {{user.profession}}</div>
+          <input type="text" class="inline-edit-profession" id="input-profession" value="{{user.profession}}">
+
 
           <!-- Rating Field -->
           <div class="rating">
@@ -68,6 +63,38 @@
             <button class="btn btn-secondary">View Contacts</button>
           </div>
         </div>
+
+        <!-- ITEM 3: Edit/Save Buttons -->
+        <div class="profile-header-actions">
+          <button class="btn-header-action" id="edit-personal-btn" title="Edit personal details">
+            <svg class="edit-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+            <span class="edit-text">Edit</span>
+          </button>
+
+          <button class="btn-header-action" id="cancel-all-btn" title="Cancel changes">
+            <svg class="cancel-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            <span>Cancel</span>
+          </button>
+
+          <button class="btn-header-action" id="save-all-btn" title="Save changes">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+              <polyline points="17 21 17 13 7 13 7 21"></polyline>
+              <polyline points="7 3 7 8 15 8"></polyline>
+            </svg>
+            <span>Save</span>
+          </button>
+        </div>
+
       </div>
 
       <!-- === Main Content Grid === -->
@@ -75,65 +102,106 @@
 
         <!-- Left Column -->
         <div class="grid-column">
-            
-            <!-- Vehicle Details (Array Representation) -->
-            <section class="section">
-                <h3 class="section-title">Registered Vehicles (<span id="vehicle-count">0</span>) </h3>
-                <div class="vehicle-list">
-                    {% for vehicle in user.vehicle_details %}
-                    <!-- Vehicle 1 -->
-                    <div class="vehicle-item">
-                        <div class="vehicle-name">
-                            {{vehicle}}
-                            <span class="vehicle-badge">{{vehicle.primary}}</span>
-                        </div>
-                        <div class="vehicle-details">
-                            <div class="vehicle-detail">Plate: <strong>ABC-1234</strong></div>
-                            <div class="vehicle-detail">Color: <strong>Silver</strong></div>
-                            <div class="vehicle-detail">Seats: <strong> 4 </strong></div>
-                            <div class="vehicle-detail">Type: <strong> SUV </strong></div>
-                        </div>
-                    </div>
-                    {% endfor %}
+
+          <!-- Vehicle Details (Array Representation) -->
+          <section class="section" id="vehicle-section">
+            <!-- REVISED Section Title -->
+            <div class="section-title">
+              <span class="section-title-text">Registered Vehicles (<span id="vehicle-count">0</span>)</span>
+              <!-- NEW: Add Vehicle Button -->
+              <button class="section-add-btn" id="add-vehicle-btn" title="Add new vehicle">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </button>
+            </div>
+            <div class="vehicle-list" id="vehicle-list">
+              {% for vehicle in user.vehicle_details %}
+              <!-- Vehicle 1 -->
+              <div class="vehicle-item">
+                <!-- REVISED: Vehicle Remove Button -->
+                <button type="button" class="vehicle-remove-btn" title="Remove vehicle">&times;</button>
+                <div class="vehicle-name">
+                  {{vehicle}}
                 </div>
-            </section>
+                <div class="vehicle-details">
+                  <div class="vehicle-detail">Plate: <strong>ABC-1234</strong></div>
+                  <div class="vehicle-detail">Color: <strong>Silver</strong></div>
+                  <div class="vehicle-detail">Seats: <strong> 4 </strong></div>
+                  <div class="vehicle-detail">Type: <strong> SUV </strong></div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </section>
         </div>
 
         <!-- Right Column -->
         <div class="grid-column">
-            
-            <!-- Basic & Contact Info -->
-            <section class="section">
-                <h3 class="section-title">Personal Details</h3>
-                <div class="info-list">
-                    <div class="info-item">
-                        <span class="info-label">Email</span>
-                        <span class="info-value">{{user.email}}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Phone</span>
-                        <span class="info-value">{{user.phone}}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Member Since</span>
-                        <span class="info-value" id = "joined-date" data-timestamp = {{user.created_at}}><span id="joined"></span></span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Total Rides</span>
-                        <span class="info-value">3,421</span>
-                    </div>
-                </div>
-            </section>
 
-            <!-- Ride Preferences -->
-            <section class="section" style="margin-top: 40px;">
-                <h3 class="section-title">Ride Preferences (<span id="pref-count">0</span>)</h3>
-                <div class="pref-tags">
-                    {% for pref in user.preferences %}
-                        <span class="pref-tag">{{pref}}</span>
-                    {% endfor %}
-                </div>
-            </section>
+          <!-- Basic & Contact Info -->
+          <!-- NEW: Added ID -->
+          <section class="section" id="personal-details-section">
+            <!-- REVISED Section Title (Button removed) -->
+            <div class="section-title">
+              <span class="section-title-text">Personal Details</span>
+            </div>
+            <div class="info-list">
+              <div class="info-item">
+                <span class="info-label">Email</span>
+                <!-- Editable Span -->
+                <span class="info-value" id="display-email">{{user.email}}</span>
+                <!-- Hidden Input -->
+                <input type="email" class="inline-edit-input" id="input-email" value="{{user.email}}">
+              </div>
+              <div class="info-item">
+                <span class="info-label">Phone</span>
+                <!-- Editable Span -->
+                <span class="info-value" id="display-phone">{{user.phone}}</span>
+                <!-- Hidden Input -->
+                <input type="tel" class="inline-edit-input" id="input-phone" value="{{user.phone}}">
+              </div>
+              <div class="info-item">
+                <span class="info-label">Member Since</span>
+                <span class="info-value" id="joined-date" data-timestamp={{user.created_at}}><span
+                    id="joined"></span></span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Total Rides</span>
+                <span class="info-value">3,421</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Ride Preferences -->
+          <section class="section" id="pref-section" style="margin-top: 40px;">
+            <!-- REVISED Section Title -->
+            <div class="section-title">
+              <span class="section-title-text">Ride Preferences (<span id="pref-count">0</span>)</span>
+              <!-- NEW: Add Preference Button -->
+              <button class="section-add-btn" id="add-pref-btn" title="Add new preference">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </button>
+            </div>
+            <!-- REVISED: Pref Tags Container -->
+            <div class="pref-tags" id="pref-tags-list">
+              {% for pref in user.preferences %}
+              <!-- REVISED: Tag is now a container -->
+              <div class="pref-tag-editable">
+                <span>{{pref}}</span>
+                <button type="button" class="pref-remove-btn" title="Remove preference">&times;</button>
+              </div>
+              {% endfor %}
+            </div>
+            <!-- REVISED: This div is no longer used for input -->
+            <div id="new-pref-list"></div>
+          </section>
 
         </div>
 
@@ -141,10 +209,48 @@
 
     </main>
   </div>
-  <!-- JavaScript from your script.js (simplified for this view) -->
-  <script src='../static/profile/script.js'>
-  </script>
+
+  <!-- === Global Save Button (REMOVED) === -->
+
+  <!-- === NEW: Add Vehicle Modal === -->
+  <div class="modal-overlay hidden" id="add-vehicle-modal">
+    <div class="modal-content">
+      <h2 class="modal-title">Add New Vehicle</h2>
+
+      <form id="vehicle-form">
+        <div class="modal-form-group full-width">
+          <label for="input-vehicle-name" class="modal-label">Vehicle Name</label>
+          <input type="text" id="input-vehicle-name" class="modal-input" placeholder="e.g. Toyota Camry 2022" required>
+        </div>
+        <div class="modal-form-grid">
+          <div class="modal-form-group">
+            <label for="input-vehicle-plate" class="modal-label">Plate #</label>
+            <input type="text" id="input-vehicle-plate" class="modal-input" placeholder="ABC-1234" required>
+          </div>
+          <div class="modal-form-group">
+            <label for="input-vehicle-color" class="modal-label">Color</label>
+            <input type="text" id="input-vehicle-color" class="modal-input" placeholder="Silver" required>
+          </div>
+          <div class="modal-form-group">
+            <label for="input-vehicle-seats" class="modal-label">Seats</label>
+            <input type="number" id="input-vehicle-seats" class="modal-input" placeholder="4" min="1" max="8" required>
+          </div>
+          <div class="modal-form-group">
+            <label for="input-vehicle-type" class="modal-label">Type</label>
+            <input type="text" id="input-vehicle-type" class="modal-input" placeholder="Sedan" required>
+          </div>
+        </div>
+        <div class="modal-form-group-checkbox">
+          <input type="checkbox" id="input-vehicle-primary" class="modal-input">
+          <label for="input-vehicle-primary" class="modal-label" style="margin:0;">Set as primary vehicle</label>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="cancel-vehicle-btn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Vehicle</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 {% endblock %}
-<!-- </body>
-</html> -->
