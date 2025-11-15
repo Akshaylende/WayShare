@@ -1,0 +1,795 @@
+/* --- Base Styles from your styles.css --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.b1 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(135deg, #fefeff 0%, #ffffff 100%);
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container1 {
+  width: 100%;
+  max-width: 75%;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  overflow: visible; /* Allow save button to be visible */
+  position: relative;
+}
+
+/* --- Main Content & Profile Header --- */
+.main-content {
+  padding: 32px;
+}
+
+/* REVISED: profile-section is now the main flex container for all 3 items */
+.profile-section {
+  display: flex;
+  flex-direction: row; /* Ensure horizontal layout */
+  gap: 32px; /* This now controls spacing */
+  margin-bottom: 40px;
+  align-items: flex-start;
+}
+
+/* --- Profile Image Container --- */
+.profile-image-container {
+  margin-left: 3%;
+  position: relative;
+  flex-shrink: 0;
+  width: 225px;
+  height: 250px;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%; /* Made round for a more modern look */
+  overflow: hidden;
+  border: 4px solid #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.profile-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- Profile Image Edit Button --- */
+.profile-image-edit-btn {
+  position: absolute;
+  bottom: 20px; /* Adjusted position */
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  display: none; /* Hide by default */
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  z-index: 10;
+}
+.is-editing .profile-image-edit-btn {
+  display: flex; /* Show when in edit mode */
+}
+.profile-image-edit-btn:hover {
+  background: #f3f4f6;
+  transform: scale(1.1);
+}
+.profile-image-edit-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: #374151;
+  stroke-width: 2;
+  fill: none;
+}
+
+/* REVISED: profile-info now grows to fill space */
+.profile-info {
+  flex-grow: 1; /* This makes it fill the available space */
+  margin-left: 8%; /* Removed old margin */
+  position: relative;
+  padding-top: 12px;
+}
+
+/* REVISED: Header Edit/Save Buttons */
+.profile-header-actions {
+  margin-right: 3%;
+  position: relative;
+  top: 12px; /* Align with profile-info padding */
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+  flex-shrink: 0; /* Prevent buttons from shrinking */
+}
+
+/* Base style for top buttons */
+.btn-header-action {
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 15px; /* Increased */
+  transition: all 0.2s;
+}
+.btn-header-action:hover {
+  transform: scale(1.05);
+}
+.btn-header-action svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+  fill: none;
+}
+
+/* "Edit" Button */
+#edit-personal-btn {
+  background: #f3f4f6;
+  color: #374151;
+}
+#edit-personal-btn:hover {
+  background: #e5e7eb;
+}
+#edit-personal-btn svg {
+  stroke: #374151;
+}
+
+/* "Save" Button */
+#save-all-btn {
+  background: #4a90e2;
+  color: white;
+}
+#save-all-btn:hover {
+  background: #357abd;
+}
+#save-all-btn svg {
+  stroke: white;
+}
+
+/* --- NEW: "Cancel" Button --- */
+#cancel-all-btn {
+  background: #f3f4f6;
+  color: #374151;
+}
+#cancel-all-btn:hover {
+  background: #e5e7eb;
+}
+#cancel-all-btn svg {
+  stroke: #374151;
+}
+
+/* Hide/Show logic */
+.is-editing #edit-personal-btn {
+  display: none;
+}
+#save-all-btn,
+#cancel-all-btn {
+  display: none;
+}
+.is-editing #save-all-btn,
+.is-editing #cancel-all-btn {
+  display: flex;
+}
+
+.profile-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+  /* Removed padding-right */
+}
+
+.profile-name {
+  font-size: 30px; /* Increased */
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.username {
+  color: #4a90e2;
+  font-weight: 500;
+  font-size: 17px; /* Increased */
+}
+
+.verified-badge {
+  background: #def7ec;
+  color: #03543f;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+}
+
+.location {
+  color: #6b7280;
+  font-size: 15px; /* Increased */
+  display: block;
+  margin-top: 4px;
+}
+
+.profession {
+  color: #374151;
+  font-size: 19px; /* Increased */
+  margin: 12px 0 16px;
+  font-weight: 500;
+}
+
+/* --- Rating Section --- */
+.rating {
+  margin-bottom: 24px;
+  background: #f9fafb;
+  padding: 12px 16px;
+  border-radius: 12px;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.rating-text {
+  font-size: 11px;
+  color: #6b7280;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.rating-value {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rating-number {
+  font-size: 26px; /* Increased */
+  font-weight: 700;
+  color: #1f2937;
+  line-height: 1;
+}
+
+.stars {
+  display: flex;
+  gap: 4px;
+}
+
+.star {
+  color: #d1d5db;
+  font-size: 22px; /* Increased */
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.star.filled {
+  color: #fbbf24;
+}
+.star.half {
+  opacity: 0.6;
+  color: #fbbf24;
+}
+
+/* --- Action Buttons --- */
+.action-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.btn {
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 15px; /* Increased */
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.btn-primary {
+  background: #4a90e2;
+  color: white;
+}
+.btn-primary:hover {
+  background: #357abd;
+}
+
+.btn-secondary {
+  background: #f3f4f6;
+  color: #374151;
+}
+.btn-secondary:hover {
+  background: #e5e7eb;
+}
+
+/* --- Content Grid & Sections --- */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  margin-top: 40px;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 40px;
+}
+
+/* --- REVISED: Section Title --- */
+.section-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #9ca3af;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; Makes space for button */
+}
+.section-title-text {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  width: 100%;
+}
+.section-title-text::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #e5e7eb;
+  margin-left: 1px;
+}
+
+/* --- NEW: Add/Edit Buttons for Sections --- */
+.section-add-btn,
+.section-edit-btn {
+  background: #f3f4f6;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-left: 12px;
+  transition: all 0.2s;
+}
+.section-add-btn:hover,
+.section-edit-btn:hover {
+  background: #e5e7eb;
+  transform: scale(1.1);
+}
+.section-add-btn svg,
+.section-edit-btn svg {
+  width: 16px;
+  height: 16px;
+  stroke: #374151;
+  stroke-width: 2.5;
+}
+.section-edit-btn svg {
+  stroke-width: 2;
+}
+/* Hide add/edit buttons by default */
+.section-add-btn,
+.section-edit-btn {
+  display: none;
+}
+/* Show them when in edit mode */
+.is-editing .section-add-btn,
+.is-editing .section-edit-btn {
+  display: flex;
+}
+
+/* --- Info Lists (Contact, Basic Info, Preferences) --- */
+.info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f3f4f6;
+  min-height: 2.5em; /* Consistent height */
+}
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-weight: 500;
+  color: #6b7280;
+  font-size: 15px; /* Increased */
+  flex-shrink: 0; /* Prevent label from shrinking */
+}
+
+.info-value {
+  color: #111827;
+  font-weight: 500;
+  font-size: 16px; /* Increased */
+  text-align: right;
+}
+
+/* --- REVISED: In-Place Edit Input --- */
+.inline-edit-input {
+  width: 100%; /* Fill available space */
+  max-width: 260px; /* But not more than 260px */
+  margin-left: 16px;
+  padding: 6px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 16px; /* Increased */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 500;
+  color: #111827;
+  text-align: right;
+  flex-grow: 0; /* Do not grow */
+  flex-shrink: 1; /* Allow to shrink if needed */
+  display: none; /* Hide by default */
+}
+.inline-edit-input:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+/* --- NEW: Specific styles for header inputs --- */
+.inline-edit-name {
+  font-size: 30px; /* Increased */
+  font-weight: 700;
+  color: #1f2937;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 4px 8px;
+  width: 100%;
+  max-width: 300px; /* <-- ADDED */
+  display: none; /* Hide by default */
+}
+.inline-edit-location {
+  color: #6b7280;
+  font-size: 15px; /* Increased */
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 4px 8px;
+  width: 100%;
+  max-width: 300px; /* <-- ADDED */
+  margin-top: 4px;
+  display: none; /* Hide by default */
+}
+.inline-edit-profession {
+  color: #374151;
+  font-size: 19px; /* Increased */
+  margin: 12px 0 16px;
+  font-weight: 500;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 4px 8px;
+  width: 100%;
+  max-width: 300px; /* <-- ADDED */
+  display: none; /* Hide by default */
+}
+
+/* Utility class to hide/show elements */
+.hidden {
+  display: none !important;
+}
+
+/* --- Vehicle List (Array Style) --- */
+.vehicle-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.vehicle-item {
+  background: #f9fafb;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  position: relative; /* For the edit button */
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.vehicle-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-color: #4a90e2;
+}
+
+/* --- REVISED: Vehicle Remove Button --- */
+.vehicle-remove-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  background: #e5e7eb;
+  color: #374151;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: bold;
+  line-height: 22px;
+  text-align: center;
+  transition: all 0.2s;
+  display: none; /* Hide by default */
+}
+.vehicle-remove-btn:hover {
+  background: #fecaca; /* Red on hover */
+  color: #b91c1c;
+}
+.is-editing .vehicle-remove-btn {
+  display: block; /* Show in edit mode */
+}
+/* Hide the old edit button */
+.vehicle-item .section-edit-btn {
+  display: none;
+}
+
+.vehicle-name {
+  font-size: 17px; /* Increased */
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 30px; /* Space for edit btn */
+}
+
+.vehicle-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+}
+.vehicle-detail {
+  font-size: 14px; /* Increased */
+  color: #6b7280;
+}
+.vehicle-detail strong {
+  color: #374151;
+  font-weight: 600;
+}
+
+/* --- REVISED: Preference Tags --- */
+.pref-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+/* This is now a container for the tag and its remove button */
+.pref-tag-editable {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px; /* Increased */
+  padding: 6px 8px 6px 12px; /* More padding on left, less on right */
+  background: #f3f4f6;
+  color: #374151;
+  border-radius: 20px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+/* NEW: Style for the new tag input's container */
+.pref-tag-editable.new-tag-input {
+  background: #e5e7eb;
+  padding: 6px 12px;
+}
+.pref-tag-editable.positive {
+  background: #ecfdf5;
+  color: #065f46;
+}
+.pref-tag-editable.neutral {
+  background: #eff6ff;
+  color: #1e40af;
+}
+
+/* NEW: Remove Preference Button */
+.pref-remove-btn {
+  background: #e5e7eb;
+  color: #374151;
+  border: none;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  font-weight: bold;
+  line-height: 16px; /* Adjust for centering 'x' */
+  text-align: center;
+  transition: all 0.2s;
+  display: none; /* Hidden by default */
+}
+.pref-remove-btn:hover {
+  background: #d1d5db;
+  color: #111827;
+}
+.is-editing .pref-remove-btn {
+  display: inline-block; /* Show when editing */
+}
+
+/* NEW: Container for new preference inputs (NO LONGER USED) */
+
+/* NEW: Style for the in-tag input */
+.pref-tag-input {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  font-size: 14px; /* Increased */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 500;
+  color: #374151;
+  width: 140px; /* Give it a size */
+}
+.pref-tag-input::placeholder {
+  color: #6b7280;
+}
+
+/* --- Global Save Button (REMOVED) --- */
+
+/* --- NEW: In Editing State --- */
+.is-editing .info-value {
+  display: none;
+}
+.is-editing .inline-edit-input {
+  display: block;
+}
+
+.is-editing .profile-name {
+  display: none;
+}
+.is-editing .inline-edit-name {
+  display: block;
+}
+
+.is-editing .location {
+  display: none;
+}
+.is-editing .inline-edit-location {
+  display: block;
+}
+
+.is-editing .profession {
+  display: none;
+}
+.is-editing .inline-edit-profession {
+  display: block;
+}
+
+/* --- NEW: Modal Styles --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.modal-content {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 500px;
+  padding: 24px 32px;
+}
+.modal-title {
+  font-size: 24px; /* Increased */
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 24px;
+}
+.modal-form-group {
+  margin-bottom: 16px;
+}
+.modal-label {
+  display: block;
+  font-size: 15px; /* Increased */
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+}
+.modal-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 17px; /* Increased */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+.modal-input:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+/* Grid for modal form */
+.modal-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.modal-form-group.full-width {
+  grid-column: 1 / -1; /* Span full width */
+}
+.modal-form-group-checkbox {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.modal-form-group-checkbox input {
+  width: 16px;
+  height: 16px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  /* Removed save button style */
+}
+@media (max-width: 768px) {
+  .profile-section {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .profile-header {
+    justify-content: center;
+    padding-right: 0; /* No padding needed */
+  }
+  .profile-info{
+    margin-left  : 0%; ;
+  }
+  .profile-header-actions {
+    position: static; /* Un-stick buttons on mobile */
+    margin-top: 16px;
+    justify-content: center;
+  }
+  .action-buttons {
+    justify-content: center;
+  }
+  .rating {
+    align-items: center;
+  }
+  .container1 {
+    max-width: 100%;
+    overflow: hidden; /* Re-hide on mobile */
+  }
+  .content-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  /* Removed save button style */
+  .modal-form-grid {
+    grid-template-columns: 1fr; /* Stack on mobile */
+  }
+}
