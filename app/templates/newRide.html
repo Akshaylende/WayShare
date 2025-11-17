@@ -60,7 +60,7 @@
                                 <select class="form-select" id="car_details" name="car_details" required>
                                     <option value="" selected>Please select from the available options</option>
                                      {% for vehicle in current_user['vehicle_details'] %}
-                                        <option value="{{vehicle}}">{{vehicle}}</option>
+                                        <option value="{{vehicle.model_name}}">{{vehicle.model_name}}</option>
                                     {% endfor %} 
                                 </select>
                                 <div class="form-text">You can add color/model in the notes.</div>
