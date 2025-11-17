@@ -1,5 +1,5 @@
 from app import app
-from app.models import Registry, User, Ride, Booking, Record
+from app.models import Registry, User, Ride, Booking, Record, Vehicle
 from mongoengine.queryset.visitor import Q
 
 def get_user(email):
@@ -65,3 +65,49 @@ def create_new_ride(data, user):
 def get_ride(ride_id):
     ride = Ride.objects(id = ride_id).first()
     return ride if ride else None
+
+
+def update_user_profile(data, user):
+    name = data['name']
+    profession = data['profession']
+    preferences = data['preferences']
+    vehicle_details = get_vehicle_details(data['vehicles'], user)
+    location = data['location']
+
+    print('In section', vehicle_details)
+
+    user = User.objects.get(id = user.id)
+    # print("Before ", user.to_json())
+    user.name = name
+    user.profession = profession
+    user.preferences= preferences
+    user.location = location
+    user.vehicle_details = vehicle_details
+    print("After ", user.to_json())
+    User.save(user)
+    return user
+
+
+def get_vehicle_details(vehicles, user)-> list:
+    result = []
+    print(vehicles[0]['name'])
+    
+    for vehicle in vehicles:
+        vehicle_ref = Vehicle.objects(reg_number = vehicle['plate']).first()
+        if vehicle_ref:
+            vehicle_ref.model_name = vehicle['name']
+            vehicle_ref.reg_number = vehicle['plate']
+            vehicle_ref.color = vehicle['color']
+            vehicle_ref.seats = vehicle['seats']
+            vehicle_ref.type = vehicle['type']
+#           vehicle_ref.owner = user
+            Vehicle.save(vehicle_ref)
+        else:
+            vehicle_ref = Vehicle(model_name = vehicle['name'], reg_number = vehicle['plate'], color = vehicle['color'], seats = vehicle['seats'], type = vehicle['type']).save()
+        
+        vehicle_ref = Vehicle.objects.get(reg_number = vehicle['plate'])
+        print(vehicle_ref.to_json())
+        result.append(vehicle_ref)
+        
+    # print("After",result)
+    return result

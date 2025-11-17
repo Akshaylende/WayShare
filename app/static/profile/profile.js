@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function () {
 
     // --- PRE-EXISTING SCRIPT ---
@@ -124,6 +123,70 @@ document.addEventListener('DOMContentLoaded', function () {
         updatePrefCount();
     }
 
+    // --- NEW: Data Collection & POST Request Function ---
+    function sendDataToServer() {
+        console.log("Collecting data to send to server...");
+
+        // 1. Collect all data from the display elements
+        // We read from the display elements because toggleEditMode(true)
+        // has already updated them from the inputs.
+        console.log(Array.from(vehicleList.querySelectorAll('.vehicle-item')));
+        const payload = {
+            name: displayName.textContent.trim(),
+            location: displayLocation.textContent.replace('Location📍- ', '').trim(),
+            profession: displayProfession.textContent.replace('Profession - ', '').trim(),
+            email: displayEmail.textContent.trim(),
+            phone: displayPhone.textContent.trim(),
+
+            // Collect preferences
+            preferences: Array.from(prefTagsList.querySelectorAll('.pref-tag-editable > span'))
+                .map(span => span.textContent.trim()),
+
+
+            
+            // Collect vehicles
+            vehicles: Array.from(vehicleList.querySelectorAll('.vehicle-item'))
+                .map(item => {
+                    return {
+                        name: item.children[1].innerText,
+                        plate: item.children[2].children[0].innerText.split(': ')[1],
+                        color: item.children[2].children[1].innerText.split(': ')[1],
+                        seats: item.children[2].children[2].innerText.split(': ')[1],
+                        type: item.children[2].children[3].innerText.split(': ')[1]
+                    };
+                })
+        };
+
+        console.log("Payload to send:", payload);
+
+        // 2. Send the POST request
+        // Replace '/save-profile-data' with your actual Flask endpoint
+        fetch('/save-profile-info', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                // In a real Flask-WTF app, you'd add a CSRF token
+                // 'X-CSRFToken': '{{ csrf_token() }}' 
+            },
+            body: JSON.stringify(payload)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Server responded with ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Server response:', data);
+                // Optionally show a more advanced success message
+            })
+            .catch(error => {
+                console.error('Error updating profile:', error);
+                alert('Error updating profile. Changes were not saved. See console for details.');
+            });
+    }
+
+
     function toggleEditMode(saveChanges) {
         if (isEditing) {
             // --- We are SAVING or CANCELING ---
@@ -152,6 +215,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
 
                 console.log('Saving changes...');
+                // --- NEW: Send all data to server ---
+                sendDataToServer();
+
             } else {
                 // Cancel: revert input values to span text
                 inputName.value = displayName.textContent;
@@ -264,29 +330,31 @@ document.addEventListener('DOMContentLoaded', function () {
         const color = document.getElementById('input-vehicle-color').value;
         const seats = document.getElementById('input-vehicle-seats').value;
         const type = document.getElementById('input-vehicle-type').value;
-        const isPrimary = document.getElementById('input-vehicle-primary').checked;
 
-        createAndAddVehicleItem(name, plate, color, seats, type, isPrimary);
+        createAndAddVehicleItem(name, plate, color, seats, type);
 
         vehicleModal.classList.add('hidden');
         vehicleForm.reset();
     });
 
     // Helper to create vehicle HTML
-    function createAndAddVehicleItem(name, plate, color, seats, type, isPrimary) {
+    function createAndAddVehicleItem(name, plate, color, seats, type) {
         const newItem = document.createElement('div');
         newItem.className = 'vehicle-item';
 
-        const badgeHTML = isPrimary
-            ? '<span class="vehicle-badge">Primary</span>'
-            : '<span class="vehicle-badge" style="background:#F3F4F6; color:#6B7280">Secondary</span>';
+        // --- NEW: Add data attributes for saving ---
+        newItem.dataset.name = name;
+        newItem.dataset.plate = plate;
+        newItem.dataset.color = color;
+        newItem.dataset.seats = seats;
+        newItem.dataset.type = type;
+
 
         // BUG FIX: Corrected typo `div classReadMe` to `div class="vehicle-details"`
         newItem.innerHTML = `
                 <button type="button" class="vehicle-remove-btn" title="Remove vehicle">&times;</button>
                 <div class="vehicle-name">
                     ${name}
-                    ${badgeHTML}
                 </div>
                 <div class="vehicle-details">
                     <div class="vehicle-detail">Plate: <strong>${plate}</strong></div>

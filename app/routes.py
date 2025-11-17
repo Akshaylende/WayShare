@@ -1,7 +1,7 @@
 from flask import app, render_template, redirect, url_for, request, jsonify
 from app import app
 from app.models import Registry, User
-from app.helpers import check_user_cred, user_exists, get_user, get_rides, create_new_ride, create_new_user,get_ride
+from app.helpers import check_user_cred, user_exists, get_user, get_rides, create_new_ride, create_new_user,get_ride, update_user_profile
 from flask_login import current_user, login_required, login_user, logout_user
 
 
@@ -100,3 +100,23 @@ def profile():
 def ride_details(ride_id):
     ride = get_ride(ride_id)
     return render_template('rideDetails.html', ride = ride)
+
+@app.route('/save-profile-info', methods=['POST'])
+@login_required
+def user_profile():
+    # user = get_user(current_user)
+    data = request.json
+    user = update_user_profile(data, current_user)
+    # user = current_user
+    # print(user.to_json())
+    print(data)
+    if user:
+        return jsonify({
+            "status": "success",
+            "message": "Profile sent successfully!"
+        }), 200
+    else:
+        return jsonify({
+            "status": "error",
+            "message": "profile not saved!"
+        }), 400
