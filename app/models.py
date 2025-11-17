@@ -1,5 +1,5 @@
 from datetime import datetime
-from mongoengine import Document, StringField, DateTimeField, IntField, ReferenceField, EmailField, ListField, FloatField, DateField, BooleanField
+from mongoengine import Document, StringField, DateTimeField, IntField, ReferenceField, EmailField, ListField, FloatField, DateField, BooleanField,EmbeddedDocument, EmbeddedDocumentField
 from flask_login import UserMixin
 from app import login_manager
 
@@ -18,6 +18,14 @@ class Registry(Document):
     password = StringField(required=True)
     created_at = DateTimeField(default=datetime.utcnow)
 
+class Vehicle(Document):
+    # id = IntField(required = True, unique = True)
+    # owner = ReferenceField(User)
+    model_name = StringField(max_length=50)
+    reg_number = StringField(max_length=30, unique=True)
+    color = StringField(max_length=20)
+    seats = IntField()
+    type = StringField(max_length=20)
 
 
 
@@ -29,7 +37,7 @@ class User(Document, UserMixin):
     email = EmailField(required=True, unique=True)
     profession = StringField()
     preferences = ListField(StringField())
-    vehicle_details = ListField(StringField())
+    vehicle_details = ListField(ReferenceField(Vehicle))
     created_at = DateTimeField(default=datetime.utcnow)
     ratings = IntField()
     location = StringField(default = 'INDIA')
@@ -79,7 +87,7 @@ class Ride(Document):
             'seats_available' : self.seats_available,
             'car_details' : self.car_details,
             'notes' : self.notes,
-            'created_at' : self.creat
+            'created_at' : self.created_at
         }
 
 # Booking collection
