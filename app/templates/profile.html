@@ -124,13 +124,13 @@
                 <!-- REVISED: Vehicle Remove Button -->
                 <button type="button" class="vehicle-remove-btn" title="Remove vehicle">&times;</button>
                 <div class="vehicle-name">
-                  {{vehicle}}
+                  {{vehicle.model_name}}
                 </div>
                 <div class="vehicle-details">
-                  <div class="vehicle-detail">Plate: <strong>ABC-1234</strong></div>
-                  <div class="vehicle-detail">Color: <strong>Silver</strong></div>
-                  <div class="vehicle-detail">Seats: <strong> 4 </strong></div>
-                  <div class="vehicle-detail">Type: <strong> SUV </strong></div>
+                  <div class="vehicle-detail">Plate: <strong>{{vehicle.reg_number}}</strong></div>
+                  <div class="vehicle-detail">Color: <strong>{{vehicle.color}}</strong></div>
+                  <div class="vehicle-detail">Seats: <strong>{{vehicle.seats}} </strong></div>
+                  <div class="vehicle-detail">Type: <strong> {{vehicle.type}} </strong></div>
                 </div>
               </div>
               {% endfor %}
@@ -165,12 +165,12 @@
               </div>
               <div class="info-item">
                 <span class="info-label">Member Since</span>
-                <span class="info-value" id="joined-date" data-timestamp={{user.created_at}}><span
+                <span class="info-value1" id="joined-date" data-timestamp={{user.created_at}}><span
                     id="joined"></span></span>
               </div>
               <div class="info-item">
                 <span class="info-label">Total Rides</span>
-                <span class="info-value">3,421</span>
+                <span class="info-value1">3,421</span>
               </div>
             </div>
           </section>
@@ -239,10 +239,6 @@
             <label for="input-vehicle-type" class="modal-label">Type</label>
             <input type="text" id="input-vehicle-type" class="modal-input" placeholder="Sedan" required>
           </div>
-        </div>
-        <div class="modal-form-group-checkbox">
-          <input type="checkbox" id="input-vehicle-primary" class="modal-input">
-          <label for="input-vehicle-primary" class="modal-label" style="margin:0;">Set as primary vehicle</label>
         </div>
 
         <div class="modal-actions">
