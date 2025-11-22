@@ -70,7 +70,8 @@ def logout():
 @app.route('/home')
 @login_required
 def home():
-    return render_template('home.html', title = 'Welcome')
+    user = current_user.to_json()
+    return render_template('home.html', title = 'Welcome', user = user)
 
 @app.route('/rides')
 def avail_rides():
