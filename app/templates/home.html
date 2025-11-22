@@ -9,7 +9,11 @@
         <!-- Header -->
         <header class="summary-header">
             <div class="summary-title">
+                {% if user['name'] %}
                 <h1>Hello, {{user['name'].split(' ')[0]}}! 👋</h1>
+                {% else %}
+                <h1>Hello ! 👋</h1>
+                {% endif %}
                 <p>Here's the summary of you with us.</p>
             </div>
             <div class="header-actions">
