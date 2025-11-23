@@ -111,3 +111,13 @@ def get_vehicle_details(vehicles, user)-> list:
         
     # print("After",result)
     return result
+
+def create_new_booking(data, user):
+    ride_id =  data['ride']
+    seats = data['seats_requested']
+    ride =  Ride.objects(id =  ride_id).first()
+    if(user.id == ride.owner.id):
+        return 400
+    booking = Booking(ride = ride, user = user, seats_requested = seats, owner = ride.owner)
+    # Booking.save(booking)
+    return booking
