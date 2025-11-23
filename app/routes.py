@@ -1,7 +1,7 @@
 from flask import app, render_template, redirect, url_for, request, jsonify
 from app import app
 from app.models import Registry, User
-from app.helpers import check_user_cred, user_exists, get_user, get_rides, create_new_ride, create_new_user,get_ride, update_user_profile
+from app.helpers import check_user_cred, user_exists, get_user, get_rides, create_new_ride, create_new_user,get_ride, update_user_profile, create_new_booking
 from flask_login import current_user, login_required, login_user, logout_user
 
 
@@ -121,3 +121,20 @@ def user_profile():
             "status": "error",
             "message": "profile not saved!"
         }), 400
+
+
+@app.route('/create-booking', methods = ['POST'])
+def create_booking():
+    data = request.json
+    booking = create_new_booking(data, current_user)    
+    
+    if booking == 400:
+        return jsonify({
+            "status": "error",
+            "message": 'Booking for own Ride is not Allowed'
+        }), 400
+    print(booking.to_json())
+    return jsonify({
+            "status": "success",
+            "message": "Booking Request sent successfully!"
+        }), 200
