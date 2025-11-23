@@ -46,5 +46,21 @@ document.addEventListener("DOMContentLoaded", function () {
         dateInput.addEventListener('input', validateTimeForDate);
         timeInput.addEventListener('input', validateTimeForDate);
     }
+
+    // // Demo alert for Send Message/View Contacts
+    // document.querySelectorAll('.btn').forEach(btn => {
+    //     btn.addEventListener('click', function () {
+    //         // Stop this script from running on the in-place edit buttons
+    //         if (this.id === 'save-all-btn' || this.classList.contains('section-edit-btn') || this.classList.contains('section-add-btn') || this.id === 'cancel-vehicle-btn' || this.id === 'edit-personal-btn' || this.id === 'cancel-all-btn') {
+    //             return;
+    //         }
+    //         const originalText = this.textContent;
+    //         this.textContent = 'Loading...';
+    //         setTimeout(() => {
+    //             alert(originalText + ' action clicked!');
+    //             this.textContent = originalText;
+    //         }, 500);
+    //     });
+    // });
     
 });
