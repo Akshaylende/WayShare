@@ -91,17 +91,26 @@ class Ride(Document):
         }
 
 # Booking collection
-class Booking:
+class Booking(Document):
     # id  = IntField(required = True, unique = True) 
     ride = ReferenceField(Ride, required = True)
     user = ReferenceField(User, required = True)
     seats_requested = IntField(required = True)
+    owner = ReferenceField(User, required = True)
     created_at = DateTimeField(default = datetime.utcnow())
 
+    def to_json(self):
+        return{
+            'ride' : self.ride,
+            'user' : self.user,
+            'seats_requested' : self.seats_requested,
+            'owner' : self.owner,
+            'created_at' : self.created_at
+        }
 
 
 # Record collection (history/logs)
-class Record:
+class Record(Document):
         # id  = IntField(required = True, unique = True) 
         ride  = ReferenceField(Ride, required = True)
         owner = ReferenceField(User, required = True)
