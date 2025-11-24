@@ -27,6 +27,16 @@ class Vehicle(Document):
     seats = IntField()
     type = StringField(max_length=20)
 
+    def to_json(self):
+        return{
+            'id': self.id,
+            'model_name': self.model_name,
+            'reg_number': self.reg_number,
+            'color': self.color,
+            'seats': self.seats,
+            'type': self.type
+        }
+
 
 
 # User collection
@@ -48,6 +58,7 @@ class User(Document, UserMixin):
     
     def to_json(self):
         return{
+            'id': self.id,
             'name' : self.name,
             'username' : self.username, 
             'email' : self.email,
@@ -78,7 +89,8 @@ class Ride(Document):
 
     def to_json(self):
         return{
-            'owner' : self.owner,
+            'id': self.id,
+            'owner' : self.owner.to_json(),
             'origin' : self.origin,
             'destination' : self.destination,
             'date' : self.date,
@@ -101,10 +113,11 @@ class Booking(Document):
 
     def to_json(self):
         return{
-            'ride' : self.ride,
-            'user' : self.user,
+            'id' : self.id,
+            'ride' : self.ride.to_json(),
+            'user' : self.user.to_json(),
             'seats_requested' : self.seats_requested,
-            'owner' : self.owner,
+            'owner' : self.owner.to_json(),
             'created_at' : self.created_at
         }
 
@@ -112,9 +125,10 @@ class Booking(Document):
 # Record collection (history/logs)
 class Record(Document):
         # id  = IntField(required = True, unique = True) 
-        ride  = ReferenceField(Ride, required = True)
+        ride  = ReferenceField(Ride, required = True, unique = True)
         owner = ReferenceField(User, required = True)
         passengers = ListField(ReferenceField(User))
+        status = StringField()
         created_at = DateTimeField(default = datetime.utcnow())
 
     

@@ -33,7 +33,7 @@
                     <div class="overview-card">
                         <div class="overview-icon icon-rides"><i class="fas fa-car"></i></div>
                         <div class="overview-info">
-                            <h3>42</h3>
+                            <h3>{{data['Total_rides']}}</h3>
                             <p>Total Rides</p>
                         </div>
                     </div>
@@ -56,25 +56,25 @@
                 <!-- 2. Upcoming Journey Card -->
                 <div class="section-heading">
                     <span>Next Journey</span>
-                    <a href="ride_detail.html">View Ticket</a> <!-- UPDATED LINK -->
+                    <a href="/ride/{{data.up_ride['id']}}">View Ticket</a> <!-- UPDATED LINK -->
                 </div>
 
                 <!-- Wrapped in A tag to make clickable -->
-                <a href="ride_detail.html" class="journey-card">
+                <a href="/ride/{{data.up_ride['id']}}" class="journey-card">
                     <div class="journey-content">
                         <div class="journey-badges">
                             <span class="badge badge-upcoming">Upcoming</span>
                             <span class="badge badge-driver">You are Driving</span>
                         </div>
                         <div class="journey-route">
-                            <span class="location-text">New York, NY</span>
+                            <span class="location-text">{{data['up_ride']['origin']}}</span>
                             <i class="fas fa-arrow-right route-arrow"></i>
-                            <span class="location-text">Boston, MA</span>
+                            <span class="location-text">{{data['up_ride']['destination']}}</span>
                         </div>
                         <div class="journey-meta">
-                            <span><i class="far fa-calendar"></i> Today, Nov 20</span>
-                            <span><i class="far fa-clock"></i> 5:30 PM</span>
-                            <span><i class="fas fa-chair"></i> 2 Seats Booked</span>
+                            <span><i class="far fa-calendar"></i>{{data['up_ride']['date']}}</span>
+                            <span><i class="far fa-clock"></i> {{data['up_ride']['time']}}</span>
+                            <span><i class="fas fa-chair"></i> {{data['up_ride']['seats_available']}}</span>
                         </div>
                     </div>
                 </a>
@@ -90,25 +90,26 @@
                     <div id="tab-incoming" class="tab-content active">
                         <div class="request-list">
                             <!-- Request 1 -->
+                            {% for booking in data.ride_requests %}
                             <div class="request-card" id="req-1">
                                 <!-- Added link to ride details in header -->
                                 <a href="ride_detail.html" class="request-main" style="text-decoration: none; color: inherit;">
                                     <div class="req-user-info">
                                         <img src="https://i.pravatar.cc/150?img=5" alt="User" class="req-avatar">
                                         <div class="req-text">
-                                            <h4>Alice Walker</h4>
-                                            <p>4.9 ★ Rating</p>
+                                            <h4>{{booking.user.name}}</h4>
+                                            <p>{{booking.user.ratings}} ★ Rating</p>
                                         </div>
                                     </div>
                                 </a>
                                 <!-- NEW: Trip Details Block -->
                                 <div class="req-trip-details">
                                     <div class="req-route">
-                                        New York <i class="fas fa-long-arrow-alt-right req-arrow"></i> Boston
+                                        {{booking.ride.origin}} <i class="fas fa-long-arrow-alt-right req-arrow"></i> {{booking.ride.destination}}
                                     </div>
                                     <div class="req-meta">
-                                        <span>Requested 1 seat</span>
-                                        <span><i class="fas fa-clock" style="font-size: 11px; margin-right: 3px;"></i> 5:30 PM</span>
+                                        <span>Requested {{booking.seats_requested}} seat</span>
+                                        <span><i class="fas fa-clock" style="font-size: 11px; margin-right: 3px;"></i> {{booking.ride.date}}</span>
                                     </div>
                                 </div>
 
@@ -117,9 +118,9 @@
                                     <button class="btn-reject" onclick="handleRequest('req-1', 'rejected')">Reject</button>
                                 </div>
                             </div>
-
+                            {% endfor %}
                             <!-- Request 2 -->
-                            <div class="request-card" id="req-2">
+                            <!-- <div class="request-card" id="req-2">
                                  <a href="ride_detail.html" class="request-main" style="text-decoration: none; color: inherit;">
                                     <div class="req-user-info">
                                         <img src="https://i.pravatar.cc/150?img=8" alt="User" class="req-avatar">
@@ -130,7 +131,7 @@
                                     </div>
                                 </a>
                                 <!-- NEW: Trip Details Block -->
-                                <div class="req-trip-details">
+                                <!-- <div class="req-trip-details">
                                     <div class="req-route">
                                         New York <i class="fas fa-long-arrow-alt-right req-arrow"></i> Philadelphia
                                     </div>
@@ -144,7 +145,7 @@
                                     <button class="btn-accept" onclick="handleRequest('req-2', 'accepted')">Accept</button>
                                     <button class="btn-reject" onclick="handleRequest('req-2', 'rejected')">Reject</button>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
 
@@ -153,13 +154,15 @@
                     <div id="tab-sent" class="tab-content">
                         <div class="my-requests-list">
                             <!-- Wrapped in A tag -->
-                            <a href="ride_detail.html" class="my-request-item">
+                            {% for request in data.sent_requests %}
+                            <a href="/ride/{{request.ride.id}}" class="my-request-item">
                                 <div class="my-req-details">
-                                    <h5>To Philadelphia</h5>
-                                    <p>Waiting for Mike R.</p>
+                                    <h5>To {{request.ride.destination}}</h5>
+                                    <p>Waiting for {{request.owner.name}}</p>
                                 </div>
                                 <span class="req-status status-pending">Pending</span>
                             </a>
+                            {% endfor %}
                             <!-- Wrapped in A tag -->
                             <a href="ride_detail.html" class="my-request-item">
                                 <div class="my-req-details">

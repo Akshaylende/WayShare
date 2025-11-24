@@ -119,5 +119,21 @@ def create_new_booking(data, user):
     if(user.id == ride.owner.id):
         return 400
     booking = Booking(ride = ride, user = user, seats_requested = seats, owner = ride.owner)
-    # Booking.save(booking)
+    Booking.save(booking)
     return booking
+
+
+def home_page_data(user):
+    response = {}
+    record_count = Record.objects(owner = user).count()
+    print(user.id)
+    up_ride = Ride.objects(owner = user).first()
+    if up_ride:
+        up_ride =  up_ride.to_json()
+    response['Total_rides'] = record_count
+    response['up_ride'] = up_ride
+    ride_req = Booking.objects(owner = user)
+    response['ride_requests'] = ride_req
+    sent_req = Booking.objects(user = user)
+    response['sent_requests']= sent_req
+    return response

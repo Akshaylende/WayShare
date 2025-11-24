@@ -1,7 +1,7 @@
 from flask import app, render_template, redirect, url_for, request, jsonify
 from app import app
 from app.models import Registry, User
-from app.helpers import check_user_cred, user_exists, get_user, get_rides, create_new_ride, create_new_user,get_ride, update_user_profile, create_new_booking
+from app.helpers import check_user_cred, user_exists, get_user, get_rides, create_new_ride, create_new_user,get_ride, update_user_profile, create_new_booking,home_page_data
 from flask_login import current_user, login_required, login_user, logout_user
 
 
@@ -70,8 +70,9 @@ def logout():
 @app.route('/home')
 @login_required
 def home():
-    user = current_user.to_json()
-    return render_template('home.html', title = 'Welcome', user = user)
+    home_data  = home_page_data(current_user)
+    print(home_data)
+    return render_template('home.html', title = 'Welcome', user = current_user.to_json(), data = home_data)
 
 @app.route('/rides')
 def avail_rides():
