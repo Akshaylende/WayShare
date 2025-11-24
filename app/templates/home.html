@@ -33,14 +33,14 @@
                     <div class="overview-card">
                         <div class="overview-icon icon-rides"><i class="fas fa-car"></i></div>
                         <div class="overview-info">
-                            <h3>{{data['Total_rides']}}</h3>
+                            <h3>{{data['total_rides']}}</h3>
                             <p>Total Rides</p>
                         </div>
                     </div>
                     <div class="overview-card">
                         <div class="overview-icon icon-earnings"><i class="fas fa-dollar-sign"></i></div>
                         <div class="overview-info">
-                            <h3>$320</h3>
+                            <h3>${{data['total_earnings']}}</h3>
                             <p>Total Earnings</p>
                         </div>
                     </div>
@@ -209,18 +209,23 @@
                 </div>
                 <div class="history-list">
                     <!-- Wrapped in A tag -->
+                     {% for record in data.records %}
                     <a href="ride_detail.html" class="ride-history-item">
                         <div class="history-date">
-                            <span class="h-day">12</span>
-                            <span class="h-month">Nov</span>
+                            <span class="h-day">{{record.ride.date}}</span>
+                            <span class="h-month">{{record.ride.date}}</span>
                         </div>
                         <div class="history-route">
-                            <h5>NY -> Philly</h5>
-                            <p>Passenger</p>
+                            <h5>{{record.ride.origin}} -> {{record.ride.destination}}</h5>
+                            {% if current_user == record.owner %}
+                                <p> Driver</p>
+                            {% else %}
+                                <p> Passenger </p>
+                            {% endif %}
                         </div>
-                        <span class="history-status status-completed">Completed</span>
+                        <span class="history-status status-completed">{{record.status}}</span>
                     </a>
-
+                        {% endfor %}
                     <a href="ride_detail.html" class="ride-history-item">
                         <div class="history-date">
                             <span class="h-day">08</span>
