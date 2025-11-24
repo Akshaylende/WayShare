@@ -128,7 +128,7 @@ class Record(Document):
         ride  = ReferenceField(Ride, required = True, unique = True)
         owner = ReferenceField(User, required = True)
         passengers = ListField(ReferenceField(User))
-        status = StringField()
+        status = StringField(default = 'Completed')
         created_at = DateTimeField(default = datetime.utcnow())
 
     

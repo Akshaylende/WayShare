@@ -125,15 +125,20 @@ def create_new_booking(data, user):
 
 def home_page_data(user):
     response = {}
-    record_count = Record.objects(owner = user).count()
+    records = Record.objects(owner = user)
+    total_earns = 0
+    for doc in records:
+        total_earns += doc.ride.price
     print(user.id)
-    up_ride = Ride.objects(owner = user).first()
+    up_ride = Ride.objects(owner = user).order_by('date', 'time').first()
     if up_ride:
         up_ride =  up_ride.to_json()
-    response['Total_rides'] = record_count
+    response['total_rides'] = len(records)
+    response['total_earnings'] = total_earns
     response['up_ride'] = up_ride
     ride_req = Booking.objects(owner = user)
     response['ride_requests'] = ride_req
     sent_req = Booking.objects(user = user)
     response['sent_requests']= sent_req
+    response['records'] = records
     return response
