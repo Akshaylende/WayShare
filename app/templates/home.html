@@ -91,9 +91,9 @@
                         <div class="request-list">
                             <!-- Request 1 -->
                             {% for booking in data.ride_requests %}
-                            <div class="request-card" id="req-1">
+                            <div class="request-card" id={{booking.id}}>
                                 <!-- Added link to ride details in header -->
-                                <a href="ride_detail.html" class="request-main" style="text-decoration: none; color: inherit;">
+                                <a href="/" class="request-main" style="text-decoration: none; color: inherit;">
                                     <div class="req-user-info">
                                         <img src="https://i.pravatar.cc/150?img=5" alt="User" class="req-avatar">
                                         <div class="req-text">
@@ -107,45 +107,18 @@
                                     <div class="req-route">
                                         {{booking.ride.origin}} <i class="fas fa-long-arrow-alt-right req-arrow"></i> {{booking.ride.destination}}
                                     </div>
-                                    <div class="req-meta">
+                                    <div class="req-meta" data-value = {{booking.seats_requested}}>
                                         <span>Requested {{booking.seats_requested}} seat</span>
                                         <span><i class="fas fa-clock" style="font-size: 11px; margin-right: 3px;"></i> {{booking.ride.date}}</span>
                                     </div>
                                 </div>
 
-                                <div class="request-actions">
-                                    <button class="btn-accept" onclick="handleRequest('req-1', 'accepted')">Accept</button>
-                                    <button class="btn-reject" onclick="handleRequest('req-1', 'rejected')">Reject</button>
+                                <div class="request-actions" data-value ={{booking.id}}>
+                                    <button class="btn-accept" onclick="handleRequest('{{booking.id}}', 'accepted')">Accept</button>
+                                    <button class="btn-reject" onclick="handleRequest('{{booking.id}}', 'rejected')">Reject</button>
                                 </div>
                             </div>
                             {% endfor %}
-                            <!-- Request 2 -->
-                            <!-- <div class="request-card" id="req-2">
-                                 <a href="ride_detail.html" class="request-main" style="text-decoration: none; color: inherit;">
-                                    <div class="req-user-info">
-                                        <img src="https://i.pravatar.cc/150?img=8" alt="User" class="req-avatar">
-                                        <div class="req-text">
-                                            <h4>David Kim</h4>
-                                            <p>New User</p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <!-- NEW: Trip Details Block -->
-                                <!-- <div class="req-trip-details">
-                                    <div class="req-route">
-                                        New York <i class="fas fa-long-arrow-alt-right req-arrow"></i> Philadelphia
-                                    </div>
-                                    <div class="req-meta">
-                                        <span>Requested 1 seat</span>
-                                        <span><i class="fas fa-clock" style="font-size: 11px; margin-right: 3px;"></i> Tomorrow</span>
-                                    </div>
-                                </div>
-
-                                <div class="request-actions">
-                                    <button class="btn-accept" onclick="handleRequest('req-2', 'accepted')">Accept</button>
-                                    <button class="btn-reject" onclick="handleRequest('req-2', 'rejected')">Reject</button>
-                                </div>
-                            </div> -->
                         </div>
                     </div>
 
