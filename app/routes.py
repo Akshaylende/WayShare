@@ -1,7 +1,7 @@
 from flask import app, render_template, redirect, url_for, request, jsonify
 from app import app
 from app.models import Registry, User
-from app.helpers import check_user_cred, user_exists, get_user, get_rides, create_new_ride, create_new_user,get_ride, update_user_profile, create_new_booking,home_page_data
+from app.helpers import check_user_cred, user_exists, get_user, get_rides, create_new_ride, create_new_user,get_ride, update_user_profile, create_new_booking,home_page_data, handle_booking
 from flask_login import current_user, login_required, login_user, logout_user
 
 
@@ -138,4 +138,14 @@ def create_booking():
     return jsonify({
             "status": "success",
             "message": "Booking Request sent successfully!"
+        }), 200
+
+@app.route('/ride-booking', methods = ['POST'])
+def ride_booking():
+    data = request.json
+    booking = handle_booking(data, current_user)
+
+    return jsonify({
+            "status": "success",
+            "message": "Booking confirmation received!"
         }), 200

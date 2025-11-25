@@ -142,3 +142,26 @@ def home_page_data(user):
     response['sent_requests']= sent_req
     response['records'] = records
     return response
+
+
+def handle_booking(data, user):
+    booking_id = data['booking']
+    action = data['action']
+    if action == 'rejected':
+        return None
+    booking = Booking.objects(id = booking_id).first()
+    ride = Ride.objects(id = booking.ride.id).first()
+    if booking.seats_requested <= ride.seats_available:
+        ride.seats_available -= booking.seats_requested
+    else:
+        return None
+    Ride.save(ride)
+    record = Record.objects(ride = booking.ride).first()
+    if record is None:
+        record = Record(ride = booking.ride, owner = booking.owner)
+    
+    record.passengers.append(user)
+    print(record)
+    booking.delete()
+    Record.save(record)
+    return record
