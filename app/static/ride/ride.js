@@ -93,13 +93,13 @@ function setupSeatStepper() {
     const availabilityEl = document.querySelector('#seats-available p');
 
     // 1. Get max seats from the "Availability" text
-    let maxSeats = 2; // Default
+    let maxSeats = 0; // Default
     if (availabilityEl) {
-        const availabilityText = availabilityEl.textContent || "2 Seats"; // e.g., "2 Seats"
-        maxSeats = parseInt(availabilityText.split(' ')[0]) || 2;
+        const availabilityText = availabilityEl.textContent; // e.g., "2 Seats"
+        maxSeats = parseInt(availabilityText.split(' ')[0]);
     }
 
-    let currentCount = 1;
+    let currentCount = 0;
 
     // 2. Function to update button states and text
     function updateState() {
