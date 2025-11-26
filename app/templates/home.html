@@ -183,45 +183,22 @@
                 <div class="history-list">
                     <!-- Wrapped in A tag -->
                      {% for record in data.records %}
-                    <a href="ride_detail.html" class="ride-history-item">
+                    <a href="/ride/{{record.ride.id}}" class="ride-history-item">
                         <div class="history-date">
-                            <span class="h-day">{{record.ride.date}}</span>
-                            <span class="h-month">{{record.ride.date}}</span>
+                            <span class="h-day">{{record.ride.date.day}}</span>
+                            <span class="h-month">{{record.ride.date.strftime('%b')}}</span>
                         </div>
                         <div class="history-route">
                             <h5>{{record.ride.origin}} -> {{record.ride.destination}}</h5>
                             {% if current_user == record.owner %}
-                                <p> Driver</p>
+                                <p style="text-align: center;"> Driver</p>
                             {% else %}
-                                <p> Passenger </p>
+                                <p style="text-align: center;"> Passenger </p>
                             {% endif %}
                         </div>
                         <span class="history-status status-completed">{{record.status}}</span>
                     </a>
                         {% endfor %}
-                    <a href="ride_detail.html" class="ride-history-item">
-                        <div class="history-date">
-                            <span class="h-day">08</span>
-                            <span class="h-month">Nov</span>
-                        </div>
-                        <div class="history-route">
-                            <h5>Boston -> NY</h5>
-                            <p>Driver</p>
-                        </div>
-                        <span class="history-status status-completed">Completed</span>
-                    </a>
-
-                    <a href="ride_detail.html" class="ride-history-item">
-                        <div class="history-date">
-                            <span class="h-day">01</span>
-                            <span class="h-month">Nov</span>
-                        </div>
-                        <div class="history-route">
-                            <h5>NY -> DC</h5>
-                            <p>Passenger</p>
-                        </div>
-                        <span class="history-status status-cancelled">Cancelled</span>
-                    </a>
                 </div>
 
             </div>
