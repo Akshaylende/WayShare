@@ -109,6 +109,7 @@ class Booking(Document):
     user = ReferenceField(User, required = True)
     seats_requested = IntField(required = True)
     owner = ReferenceField(User, required = True)
+    status = StringField(default = 'Pending')
     created_at = DateTimeField(default = datetime.utcnow())
 
     def to_json(self):
@@ -118,6 +119,7 @@ class Booking(Document):
             'user' : self.user.to_json(),
             'seats_requested' : self.seats_requested,
             'owner' : self.owner.to_json(),
+            'status': self.status,
             'created_at' : self.created_at
         }
 
