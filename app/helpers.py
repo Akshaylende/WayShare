@@ -147,9 +147,11 @@ def home_page_data(user):
 def handle_booking(data, user):
     booking_id = data['booking']
     action = data['action']
-    if action == 'rejected':
-        return None
     booking = Booking.objects(id = booking_id).first()
+    if action == 'rejected':
+        booking.status = 'rejected'
+        Booking.save(booking)
+        return None
     ride = Ride.objects(id = booking.ride.id).first()
     if booking.seats_requested <= ride.seats_available:
         ride.seats_available -= booking.seats_requested
