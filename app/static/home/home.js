@@ -15,6 +15,23 @@ function switchTab(tabName) {
         document.getElementById('tab-sent').classList.add('active');
     }
 }
+document.addEventListener('DOMContentLoaded', function () {
+    const cards = document.getElementById('incoming-count');
+    function updateIncomingCount() {
+        const count = document.getElementsByClassName('request-card').length;
+        if (cards)
+            cards.textContent = count;
+    }
+    updateIncomingCount(); 
+
+    const cards2 = document.getElementById('sent-count');
+    function updateSentCount() {
+        const count2 = document.getElementsByClassName("my-req-details").length;
+        if (cards2)
+            cards2.textContent = count2;
+    }
+    updateSentCount(); 
+});
 
 // Simple function to handle accept/reject UI interaction
 function handleRequest(cardId, action) {
