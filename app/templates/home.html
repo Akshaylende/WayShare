@@ -82,8 +82,8 @@
                 <!-- 3. Requests Tab Container -->
                 <div class="requests-tabs-container">
                     <div class="tabs-header">
-                        <button class="tab-btn active" onclick="switchTab('incoming')">Incoming Requests (2)</button>
-                        <button class="tab-btn" onclick="switchTab('sent')">My Sent Requests</button>
+                        <button class="tab-btn active" onclick="switchTab('incoming')">Incoming Requests (<span id="incoming-count">0</span>)</button>
+                        <button class="tab-btn" onclick="switchTab('sent')">My Sent Requests (<span id="sent-count">0</span>)</button>
                     </div>
 
                     <!-- Tab Content: Incoming Requests (For Drivers) -->
@@ -103,7 +103,7 @@
                                     </div>
                                 </a>
                                 <!-- NEW: Trip Details Block -->
-                                <div class="req-trip-details">
+                                <div class="req-trip-details" id = 'trip-details-id'>
                                     <div class="req-route">
                                         {{booking.ride.origin}} <i class="fas fa-long-arrow-alt-right req-arrow"></i> {{booking.ride.destination}}
                                     </div>
@@ -129,21 +129,13 @@
                             <!-- Wrapped in A tag -->
                             {% for request in data.sent_requests %}
                             <a href="/ride/{{request.ride.id}}" class="my-request-item">
-                                <div class="my-req-details">
+                                <div class="my-req-details" id = "my-req-id">
                                     <h5>To {{request.ride.destination}}</h5>
                                     <p>Waiting for {{request.owner.name}}</p>
                                 </div>
-                                <span class="req-status status-pending">Pending</span>
+                                <span class="req-status status-{{'pending' if request.status == 'Pending' else 'rejected' }}">{{request.status}}</span>
                             </a>
                             {% endfor %}
-                            <!-- Wrapped in A tag -->
-                            <a href="ride_detail.html" class="my-request-item">
-                                <div class="my-req-details">
-                                    <h5>To Washington DC</h5>
-                                    <p>James B.</p>
-                                </div>
-                                <span class="req-status status-accepted">Accepted</span>
-                            </a>
                         </div>
                     </div>
                 </div>
