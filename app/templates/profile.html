@@ -65,6 +65,7 @@
         </div>
 
         <!-- ITEM 3: Edit/Save Buttons -->
+        {% if user == current_user %}
         <div class="profile-header-actions">
           <button class="btn-header-action" id="edit-personal-btn" title="Edit personal details">
             <svg class="edit-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
@@ -94,7 +95,7 @@
             <span>Save</span>
           </button>
         </div>
-
+        {% endif %}
       </div>
 
       <!-- === Main Content Grid === -->
