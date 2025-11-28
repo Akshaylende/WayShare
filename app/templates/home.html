@@ -93,7 +93,7 @@
                             {% for booking in data.ride_requests %}
                             <div class="request-card" id={{booking.id}}>
                                 <!-- Added link to ride details in header -->
-                                <a href="/" class="request-main" style="text-decoration: none; color: inherit;">
+                                <a href="/user/{{booking.user.id}}" class="request-main" style="text-decoration: none; color: inherit;">
                                     <div class="req-user-info">
                                         <img src="https://i.pravatar.cc/150?img=5" alt="User" class="req-avatar">
                                         <div class="req-text">
@@ -103,7 +103,7 @@
                                     </div>
                                 </a>
                                 <!-- NEW: Trip Details Block -->
-                                <div class="req-trip-details" id = 'trip-details-id'>
+                                <a href = "/ride/{{booking.ride.id}}" div class="req-trip-details" id = 'trip-details-id'>
                                     <div class="req-route">
                                         {{booking.ride.origin}} <i class="fas fa-long-arrow-alt-right req-arrow"></i> {{booking.ride.destination}}
                                     </div>
@@ -111,7 +111,7 @@
                                         <span>Requested {{booking.seats_requested}} seat</span>
                                         <span><i class="fas fa-clock" style="font-size: 11px; margin-right: 3px;"></i> {{booking.ride.date}}</span>
                                     </div>
-                                </div>
+                                </a>
 
                                 <div class="request-actions" data-value ={{booking.id}}>
                                     <button class="btn-accept" onclick="handleRequest('{{booking.id}}', 'accepted')">Accept</button>
@@ -169,7 +169,7 @@
 
                 <!-- 5. Recent History -->
                 <div class="section-heading">
-                    <span>Recent Rides</span>
+                    <span> Recent Rides </span>
                     <a href="#">View All</a>
                 </div>
                 <div class="history-list">

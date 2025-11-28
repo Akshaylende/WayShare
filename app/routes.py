@@ -93,10 +93,11 @@ def new_ride():
     ride = create_new_ride(data, current_user)
     return redirect(url_for('home'))
 
-@app.route('/user')
+@app.route('/user/<string:user_id>')
 @login_required
-def profile():
-    return render_template('profile.html', user = current_user)
+def profile(user_id):
+    user = User.objects(id = user_id).first()
+    return render_template('profile.html', user = user)
 
 @app.route('/ride/<string:ride_id>')
 def ride_details(ride_id):
