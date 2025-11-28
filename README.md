@@ -54,10 +54,3 @@ docker build -t wayshare-app .
 
 # Run the container
 docker run -p 5050:5000 wayshare-app
-
-
-
-
-
-###
-Hiding edit button for users other than own profile
